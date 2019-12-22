@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React from 'react';
-import { Form, Button } from 'semantic-ui-react';
+import { Form, Button, Popup } from 'semantic-ui-react';
 import { css, jsx } from '@emotion/core';
 import { ChromePicker } from 'react-color';
 
@@ -20,8 +20,24 @@ const ColorPicker = ({
   const [isActive, setIsActive] = React.useState(false);
   return (
     <Form.Group>
-      <Form.Input />
-      {isActive ? (
+      {/* TODO: make as a button */}
+      <div
+        css={css`
+          width: 38px;
+          border: 1px solid #e1e1e1;
+          border-radius: 4px;
+          margin-right: 5px;
+          background-color: ${color};
+        `}
+      />
+      <Popup
+        on="click"
+        trigger={<Button>{buttonText}</Button>}
+        open={isActive}
+        onClose={() => setIsActive(false)}
+        onOpen={() => setIsActive(true)}
+        position="top right"
+      >
         <div
           css={css`
             position: absolute;
@@ -33,8 +49,7 @@ const ColorPicker = ({
             onChange={color => onChange(color, name)}
           />
         </div>
-      ) : null}
-      <Button onClick={() => setIsActive(!isActive)}>{buttonText}</Button>
+      </Popup>
     </Form.Group>
   );
 };

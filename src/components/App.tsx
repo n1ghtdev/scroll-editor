@@ -28,7 +28,7 @@ const App = () => {
     setScrollOptions(opts => ({ ...opts, [state]: color.hex }));
   };
   console.log(scrollOptions.scrollbarColor);
-
+  // TODO: move form.field and label to ColorPicker
   return (
     <Container>
       <Grid divided="vertically">
@@ -38,49 +38,57 @@ const App = () => {
         <Grid.Row columns={2}>
           <Grid.Column>
             <Form>
-              <Form.Input
-                name="scrollbarWidth"
-                value={scrollOptions.scrollbarWidth}
-                onChange={e => onChange(e)}
-                label="Scrollbar width"
-              />
-              {/* <Form.Input
-                type="color"
-                name="scrollbarColor"
-                value={scrollOptions.scrollbarColor}
-                onChange={e => onChange(e)}
-                label="Scrollbar color"
-              /> */}
-              <ColorPicker
-                color={scrollOptions.scrollbarColor}
-                onChange={onColorChange}
-                name="scrollbarColor"
-                buttonText="Change scrollbar color"
-              />
-              <ColorPicker
-                color={scrollOptions.trackColor}
-                onChange={onColorChange}
-                name="trackColor"
-                buttonText="Change scrollbar-track color"
-              />
-              <Form.Input
-                name="trackRadius"
-                value={scrollOptions.trackRadius}
-                onChange={e => onChange(e)}
-                label="Track radius"
-              />
-              <ColorPicker
-                color={scrollOptions.thumbColor}
-                onChange={onColorChange}
-                name="thumbColor"
-                buttonText="Change scrollbar-thumb color"
-              />
-              <Form.Input
-                name="thumbRadius"
-                value={scrollOptions.thumbRadius}
-                onChange={e => onChange(e)}
-                label="Thumb radius"
-              />
+              <Form.Group>
+                <Form.Input
+                  name="scrollbarWidth"
+                  value={scrollOptions.scrollbarWidth}
+                  onChange={e => onChange(e)}
+                  label="Scrollbar width"
+                />
+                <Form.Field>
+                  <label>Scrollbar color</label>
+                  <ColorPicker
+                    color={scrollOptions.scrollbarColor}
+                    onChange={onColorChange}
+                    name="scrollbarColor"
+                    buttonText="Change scrollbar color"
+                  />
+                </Form.Field>
+              </Form.Group>
+              <Form.Group>
+                <Form.Input
+                  name="trackRadius"
+                  value={scrollOptions.trackRadius}
+                  onChange={e => onChange(e)}
+                  label="Track radius"
+                />
+                <Form.Field>
+                  <label>Track color</label>
+                  <ColorPicker
+                    color={scrollOptions.trackColor}
+                    onChange={onColorChange}
+                    name="trackColor"
+                    buttonText="Change track color"
+                  />
+                </Form.Field>
+              </Form.Group>
+              <Form.Group>
+                <Form.Input
+                  name="thumbRadius"
+                  value={scrollOptions.thumbRadius}
+                  onChange={e => onChange(e)}
+                  label="Thumb radius"
+                />
+                <Form.Field>
+                  <label>Thumb color</label>
+                  <ColorPicker
+                    color={scrollOptions.thumbColor}
+                    onChange={onColorChange}
+                    name="thumbColor"
+                    buttonText="Change thumb color"
+                  />
+                </Form.Field>
+              </Form.Group>
             </Form>
           </Grid.Column>
           <Grid.Column>
