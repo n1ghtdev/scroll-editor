@@ -20,8 +20,8 @@ const ColorPicker = ({
   const [isActive, setIsActive] = React.useState(false);
   return (
     <Form.Group>
-      {/* TODO: make as a button */}
-      <div
+      <button
+        onClick={() => setIsActive(!isActive)}
         css={css`
           width: 38px;
           border: 1px solid #e1e1e1;
