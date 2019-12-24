@@ -1,6 +1,5 @@
 /** @jsx jsx */
-import React from 'react';
-import { Form, Button, Popup } from 'semantic-ui-react';
+import { Form, Popover, Button } from 'antd';
 import { css, jsx } from '@emotion/core';
 import { ChromePicker } from 'react-color';
 
@@ -8,49 +7,40 @@ interface ColorPickerProps {
   color: any;
   onChange: (color: any, state: any) => void;
   name: string;
-  buttonText: string;
 }
 
-const ColorPicker = ({
-  color,
-  onChange,
-  name,
-  buttonText,
-}: ColorPickerProps) => {
-  const [isActive, setIsActive] = React.useState(false);
+const ColorPicker = ({ color, onChange, name }: ColorPickerProps) => {
   return (
-    <Form.Group>
-      <button
-        onClick={() => setIsActive(!isActive)}
-        css={css`
-          width: 38px;
-          border: 1px solid #e1e1e1;
-          border-radius: 4px;
-          margin-right: 5px;
-          background-color: ${color};
-        `}
-      />
-      <Popup
-        on="click"
-        trigger={<Button>{buttonText}</Button>}
-        open={isActive}
-        onClose={() => setIsActive(false)}
-        onOpen={() => setIsActive(true)}
-        position="top right"
-      >
-        <div
+    <Popover
+      trigger="click"
+      content={
+        <ChromePicker color={color} onChange={color => onChange(color, name)} />
+      }
+    >
+      <Form.Item>
+        <Button
           css={css`
-            position: absolute;
-            z-index: 2;
+            border: 1px solid #e1e1e1;
+            border-radius: 4px;
+            margin-right: 5px;
+            background-color: ${color};
+            &:hover,
+            &:focus {
+              background-color: ${color};
+            }
+          `}
+        />
+        <span
+          css={css`
+            line-height: 2.25;
+            margin-left: 5px;
+            font-weight: bold;
           `}
         >
-          <ChromePicker
-            color={color}
-            onChange={color => onChange(color, name)}
-          />
-        </div>
-      </Popup>
-    </Form.Group>
+          {color}
+        </span>
+      </Form.Item>
+    </Popover>
   );
 };
 

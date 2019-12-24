@@ -1,13 +1,12 @@
 /** @jsx jsx */
 import React from 'react';
-import 'semantic-ui-css/semantic.min.css';
-import { Container, Grid, Form, Button } from 'semantic-ui-react';
+import { Row, Col, Form } from 'antd';
 import { css, jsx } from '@emotion/core';
 import ColorPicker from './ColorPicker';
+import InputSlider from './InputSlider';
 
 const App = () => {
   // add state to each (:hover, :active)
-  const [isColorPickerActive, setIsColorPickerActive] = React.useState(false);
   const [scrollOptions, setScrollOptions] = React.useState({
     scrollbarWidth: 14,
     scrollbarColor: 'green',
@@ -17,112 +16,137 @@ const App = () => {
     thumbRadius: 0,
   });
 
-  const onChange = (evt: React.FormEvent<EventTarget>): void => {
-    const target = evt.target as HTMLInputElement;
-    setScrollOptions(opts => ({ ...opts, [target.name]: target.value }));
-  };
-
   const onColorChange = (color: any, state: string) => {
-    console.log(color);
-
     setScrollOptions(opts => ({ ...opts, [state]: color.hex }));
   };
-  console.log(scrollOptions.scrollbarColor);
-  // TODO: move form.field and label to ColorPicker
   return (
-    <Container>
-      <Grid divided="vertically">
-        <Grid.Row columns={1}>
-          <Grid.Column>Header/Title of app</Grid.Column>
-        </Grid.Row>
-        <Grid.Row columns={2}>
-          <Grid.Column>
-            <Form>
-              <Form.Group>
-                <Form.Input
-                  name="scrollbarWidth"
+    <div
+      css={css`
+        max-width: 1200px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 15px;
+        padding-right: 15px;
+      `}
+    >
+      <Row>
+        <Col>Header/Title of app</Col>
+      </Row>
+      <Row type="flex">
+        <Col span={12}>
+          <Form layout="vertical">
+            <Form.Item label="Scrollbar">
+              <Form.Item
+                label="Scrollbar width"
+                style={{ display: 'inline-block', width: '50%' }}
+              >
+                <InputSlider
                   value={scrollOptions.scrollbarWidth}
-                  onChange={e => onChange(e)}
-                  label="Scrollbar width"
+                  onChange={(value: any) =>
+                    setScrollOptions(opts => ({
+                      ...opts,
+                      scrollbarWidth: value,
+                    }))
+                  }
                 />
-                <Form.Field>
-                  <label>Scrollbar color</label>
-                  <ColorPicker
-                    color={scrollOptions.scrollbarColor}
-                    onChange={onColorChange}
-                    name="scrollbarColor"
-                    buttonText="Change scrollbar color"
-                  />
-                </Form.Field>
-              </Form.Group>
-              <Form.Group>
-                <Form.Input
-                  name="trackRadius"
+              </Form.Item>
+              <Form.Item
+                label="Scrollbar color"
+                style={{ display: 'inline-block', width: '50%' }}
+              >
+                <ColorPicker
+                  color={scrollOptions.scrollbarColor}
+                  onChange={onColorChange}
+                  name="scrollbarColor"
+                />
+              </Form.Item>
+            </Form.Item>
+            <Form.Item label="Scrollbar-track">
+              <Form.Item
+                label="Track radius"
+                style={{ display: 'inline-block', width: '50%' }}
+              >
+                <InputSlider
                   value={scrollOptions.trackRadius}
-                  onChange={e => onChange(e)}
-                  label="Track radius"
+                  onChange={(value: any) =>
+                    setScrollOptions(opts => ({
+                      ...opts,
+                      trackRadius: value,
+                    }))
+                  }
                 />
-                <Form.Field>
-                  <label>Track color</label>
-                  <ColorPicker
-                    color={scrollOptions.trackColor}
-                    onChange={onColorChange}
-                    name="trackColor"
-                    buttonText="Change track color"
-                  />
-                </Form.Field>
-              </Form.Group>
-              <Form.Group>
-                <Form.Input
-                  name="thumbRadius"
+              </Form.Item>
+              <Form.Item
+                label="Track color"
+                style={{ display: 'inline-block', width: '50%' }}
+              >
+                <ColorPicker
+                  color={scrollOptions.trackColor}
+                  onChange={onColorChange}
+                  name="trackColor"
+                />
+              </Form.Item>
+            </Form.Item>
+            <Form.Item label="Scrollbar-thumb">
+              <Form.Item
+                label="Thumb radius"
+                style={{ display: 'inline-block', width: '50%' }}
+              >
+                <InputSlider
                   value={scrollOptions.thumbRadius}
-                  onChange={e => onChange(e)}
-                  label="Thumb radius"
+                  onChange={(value: any) =>
+                    setScrollOptions(opts => ({
+                      ...opts,
+                      thumbRadius: value,
+                    }))
+                  }
                 />
-                <Form.Field>
-                  <label>Thumb color</label>
-                  <ColorPicker
-                    color={scrollOptions.thumbColor}
-                    onChange={onColorChange}
-                    name="thumbColor"
-                    buttonText="Change thumb color"
-                  />
-                </Form.Field>
-              </Form.Group>
-            </Form>
-          </Grid.Column>
-          <Grid.Column>
-            Scroll preview/code
+              </Form.Item>
+              <Form.Item
+                label="Thumb color"
+                style={{ display: 'inline-block', width: '50%' }}
+              >
+                <ColorPicker
+                  color={scrollOptions.thumbColor}
+                  onChange={onColorChange}
+                  name="thumbColor"
+                />
+              </Form.Item>
+            </Form.Item>
+          </Form>
+        </Col>
+        <Col span={12}>
+          Scroll preview/code
+          <div
+            css={css`
+              height: 100%;
+              width: 100%;
+              background-color: #f5f5f5;
+              overflow-y: scroll;
+              &::-webkit-scrollbar-track {
+                background-color: ${scrollOptions.trackColor};
+                border-radius: ${scrollOptions.trackRadius}px;
+              }
+              &::-webkit-scrollbar {
+                width: ${scrollOptions.scrollbarWidth}px;
+                background-color: ${scrollOptions.scrollbarColor};
+              }
+              &::-webkit-scrollbar-thumb {
+                background-color: ${scrollOptions.thumbColor};
+                border-radius: ${scrollOptions.thumbRadius}px;
+              }
+            `}
+          >
             <div
               css={css`
-                height: 100%;
-                width: 100%;
-                background-color: #f5f5f5;
-                overflow-y: scroll;
-                &::-webkit-scrollbar-track {
-                  background-color: ${scrollOptions.trackColor};
-                  border-radius: ${scrollOptions.trackRadius}px;
-                }
-                &::-webkit-scrollbar {
-                  width: ${scrollOptions.scrollbarWidth}px;
-                  background-color: ${scrollOptions.scrollbarColor};
-                }
-                &::-webkit-scrollbar-thumb {
-                  background-color: ${scrollOptions.thumbColor};
-                  border-radius: ${scrollOptions.thumbRadius}px;
-                }
+                min-height: 125%;
               `}
-            >
-              <div
-                css={css`
-                  min-height: 125%;
-                `}
-              ></div>
-            </div>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-    </Container>
+            ></div>
+          </div>
+        </Col>
+      </Row>
+    </div>
   );
 };
 
