@@ -5,7 +5,7 @@ import { ChromePicker } from 'react-color';
 
 interface ColorPickerProps {
   color: any;
-  onChange: (color: any, state: any) => void;
+  onChange: (color: any) => void;
   name: string;
 }
 
@@ -13,9 +13,8 @@ const ColorPicker = ({ color, onChange, name }: ColorPickerProps) => {
   return (
     <Popover
       trigger="click"
-      content={
-        <ChromePicker color={color} onChange={color => onChange(color, name)} />
-      }
+      // move <ChromePicker /> outside, rename to ColorPickerPopup
+      content={<ChromePicker color={color} onChange={onChange} />}
     >
       <Form.Item>
         <Button

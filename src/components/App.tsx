@@ -2,34 +2,54 @@
 import React from 'react';
 import { Row, Col, Form } from 'antd';
 import { css, jsx } from '@emotion/core';
+
 import ColorPicker from './ColorPicker';
 import InputSlider from './InputSlider';
+import Container from './Container';
+
+import reducer from '../modules/scrollOptions/reducer';
+import {
+  updateScrollbar,
+  updateTrack,
+  updateThumb,
+} from '../modules/scrollOptions/actions';
+import { ReducerState } from '../modules/scrollOptions/types';
+
+const initialState: ReducerState = {
+  default: {
+    scrollbar: { width: 12, color: '#eeeeee' },
+    track: { radius: 0, color: 'red' },
+    thumb: { radius: 0, color: 'green' },
+  },
+  hover: { thumb: { color: 'yellow' } },
+  active: { thumb: { color: 'orange' } },
+};
 
 const App = () => {
-  // add state to each (:hover, :active)
-  const [scrollOptions, setScrollOptions] = React.useState({
-    scrollbarWidth: 14,
-    scrollbarColor: 'green',
-    trackColor: 'red',
-    trackRadius: 0,
-    thumbColor: 'blue',
-    thumbRadius: 0,
-  });
+  const [state, dispatch] = React.useReducer(reducer, initialState);
 
-  const onColorChange = (color: any, state: string) => {
-    setScrollOptions(opts => ({ ...opts, [state]: color.hex }));
-  };
+  const styles = css`
+    &::-webkit-scrollbar {
+      width: ${state.default.scrollbar.width}px;
+      background-color: ${state.default.scrollbar.color};
+    }
+    &::-webkit-scrollbar-track {
+      background-color: ${state.default.track.color};
+      border-radius: ${state.default.track.radius}px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: ${state.default.thumb.color};
+      border-radius: ${state.default.thumb.radius}px;
+      &:hover {
+        background-color: ${state.hover.thumb.color};
+      }
+      &:active {
+        background-color: ${state.active.thumb.color};
+      }
+    }
+  `;
   return (
-    <div
-      css={css`
-        max-width: 1200px;
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-        padding-left: 15px;
-        padding-right: 15px;
-      `}
-    >
+    <Container>
       <Row>
         <Col>Header/Title of app</Col>
       </Row>
@@ -42,12 +62,15 @@ const App = () => {
                 style={{ display: 'inline-block', width: '50%' }}
               >
                 <InputSlider
-                  value={scrollOptions.scrollbarWidth}
+                  value={state.default.scrollbar.width}
                   onChange={(value: any) =>
-                    setScrollOptions(opts => ({
-                      ...opts,
-                      scrollbarWidth: value,
-                    }))
+                    dispatch(
+                      updateScrollbar({
+                        name: 'width',
+                        value,
+                        state: 'default',
+                      }),
+                    )
                   }
                 />
               </Form.Item>
@@ -56,8 +79,16 @@ const App = () => {
                 style={{ display: 'inline-block', width: '50%' }}
               >
                 <ColorPicker
-                  color={scrollOptions.scrollbarColor}
-                  onChange={onColorChange}
+                  color={state.default.scrollbar.color}
+                  onChange={(color: any) =>
+                    dispatch(
+                      updateScrollbar({
+                        name: 'color',
+                        value: color.hex,
+                        state: 'default',
+                      }),
+                    )
+                  }
                   name="scrollbarColor"
                 />
               </Form.Item>
@@ -68,12 +99,11 @@ const App = () => {
                 style={{ display: 'inline-block', width: '50%' }}
               >
                 <InputSlider
-                  value={scrollOptions.trackRadius}
+                  value={state.default.track.radius}
                   onChange={(value: any) =>
-                    setScrollOptions(opts => ({
-                      ...opts,
-                      trackRadius: value,
-                    }))
+                    dispatch(
+                      updateTrack({ name: 'radius', value, state: 'default' }),
+                    )
                   }
                 />
               </Form.Item>
@@ -82,8 +112,16 @@ const App = () => {
                 style={{ display: 'inline-block', width: '50%' }}
               >
                 <ColorPicker
-                  color={scrollOptions.trackColor}
-                  onChange={onColorChange}
+                  color={state.default.track.color}
+                  onChange={(color: any) =>
+                    dispatch(
+                      updateTrack({
+                        name: 'color',
+                        value: color.hex,
+                        state: 'default',
+                      }),
+                    )
+                  }
                   name="trackColor"
                 />
               </Form.Item>
@@ -94,12 +132,11 @@ const App = () => {
                 style={{ display: 'inline-block', width: '50%' }}
               >
                 <InputSlider
-                  value={scrollOptions.thumbRadius}
+                  value={state.default.thumb.radius}
                   onChange={(value: any) =>
-                    setScrollOptions(opts => ({
-                      ...opts,
-                      thumbRadius: value,
-                    }))
+                    dispatch(
+                      updateThumb({ name: 'radius', value, state: 'default' }),
+                    )
                   }
                 />
               </Form.Item>
@@ -108,8 +145,16 @@ const App = () => {
                 style={{ display: 'inline-block', width: '50%' }}
               >
                 <ColorPicker
-                  color={scrollOptions.thumbColor}
-                  onChange={onColorChange}
+                  color={state.default.thumb.color}
+                  onChange={(color: any) =>
+                    dispatch(
+                      updateThumb({
+                        name: 'color',
+                        value: color.hex,
+                        state: 'default',
+                      }),
+                    )
+                  }
                   name="thumbColor"
                 />
               </Form.Item>
@@ -124,29 +169,18 @@ const App = () => {
               width: 100%;
               background-color: #f5f5f5;
               overflow-y: scroll;
-              &::-webkit-scrollbar-track {
-                background-color: ${scrollOptions.trackColor};
-                border-radius: ${scrollOptions.trackRadius}px;
-              }
-              &::-webkit-scrollbar {
-                width: ${scrollOptions.scrollbarWidth}px;
-                background-color: ${scrollOptions.scrollbarColor};
-              }
-              &::-webkit-scrollbar-thumb {
-                background-color: ${scrollOptions.thumbColor};
-                border-radius: ${scrollOptions.thumbRadius}px;
-              }
+              ${styles}
             `}
           >
             <div
               css={css`
                 min-height: 125%;
               `}
-            ></div>
+            />
           </div>
         </Col>
       </Row>
-    </div>
+    </Container>
   );
 };
 
