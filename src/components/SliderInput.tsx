@@ -1,12 +1,12 @@
 import React from 'react';
 import { Col, Slider, InputNumber } from 'antd';
 
-interface InputSliderProps {
+interface SliderInputProps {
   value: any;
   onChange: (value: any) => void;
 }
 
-const InputSlider = (props: InputSliderProps) => {
+const SliderInput = (props: SliderInputProps) => {
   return (
     <>
       <Col span={16}>
@@ -31,4 +31,4 @@ const InputSlider = (props: InputSliderProps) => {
   );
 };
 
-export default InputSlider;
+export default SliderInput;

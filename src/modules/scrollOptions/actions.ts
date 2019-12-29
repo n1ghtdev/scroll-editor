@@ -1,22 +1,19 @@
-import {
-  updateActionProps,
-  ActionTypes,
-  UPDATE_SCROLLBAR,
-  UPDATE_TRACK,
-  UPDATE_THUMB,
-} from './types';
+import { ActionTypes, ReducerActions } from './types';
 
-export const updateScrollbar = (payload: updateActionProps): ActionTypes => ({
-  type: UPDATE_SCROLLBAR,
+export const updatePropertyAction = (
+  option: any,
+  payload: any,
+): ReducerActions => ({
+  type: ActionTypes.UPDATE_PROPERTY,
+  option,
   payload,
 });
 
-export const updateTrack = (payload: updateActionProps): ActionTypes => ({
-  type: UPDATE_TRACK,
-  payload,
-});
-
-export const updateThumb = (payload: updateActionProps): ActionTypes => ({
-  type: UPDATE_THUMB,
+export const addPropertyAction = (
+  option: any,
+  payload: any,
+): ReducerActions => ({
+  type: ActionTypes.ADD_PROPERTY,
+  option,
   payload,
 });

@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React from 'react';
-import { Row, Col, Form } from 'antd';
+import { Row, Col } from 'antd';
 import { css, jsx } from '@emotion/core';
 
 import Container from './Container';
@@ -12,13 +12,18 @@ import reducer from '../modules/scrollOptions/reducer';
 import { ReducerState } from '../modules/scrollOptions/types';
 
 const initialState: ReducerState = {
-  default: {
-    scrollbar: { width: 12, color: '#eeeeee' },
-    track: { radius: 0, color: 'red' },
-    thumb: { radius: 0, color: 'green' },
-  },
-  hover: { thumb: { color: 'yellow' } },
-  active: { thumb: { color: 'orange' } },
+  scrollbar: [
+    { id: 0, property: 'width', value: 12 },
+    { id: 1, property: 'color', value: '#eeeeee' },
+  ],
+  track: [
+    { id: 0, property: 'radius', value: 0 },
+    { id: 1, property: 'color', value: 'red' },
+  ],
+  thumb: [
+    { id: 0, property: 'radius', value: 0 },
+    { id: 1, property: 'color', value: 'red' },
+  ],
 };
 
 const App = () => {
@@ -26,21 +31,21 @@ const App = () => {
 
   const styles = css`
     &::-webkit-scrollbar {
-      width: ${state.default.scrollbar.width}px;
-      background-color: ${state.default.scrollbar.color};
+      width: 0px;
+      background-color: #000;
     }
     &::-webkit-scrollbar-track {
-      background-color: ${state.default.track.color};
-      border-radius: ${state.default.track.radius}px;
+      background-color: #000;
+      border-radius: 0px;
     }
     &::-webkit-scrollbar-thumb {
-      background-color: ${state.default.thumb.color};
-      border-radius: ${state.default.thumb.radius}px;
+      background-color: #000;
+      border-radius: 0px;
       &:hover {
-        background-color: ${state.hover.thumb.color};
+        background-color: #000;
       }
       &:active {
-        background-color: ${state.active.thumb.color};
+        background-color: #000;
       }
     }
   `;

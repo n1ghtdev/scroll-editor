@@ -1,62 +1,20 @@
-import {
-  ReducerState,
-  ActionTypes,
-  UPDATE_SCROLLBAR,
-  UPDATE_TRACK,
-  UPDATE_THUMB,
-  ADD_PROPERTY,
-} from './types';
+import { ActionTypes, ReducerActions, ReducerState } from './types';
+import produce from 'immer';
 
-const reducer = (state: ReducerState, action: ActionTypes) => {
-  const { payload } = action;
-
-  switch (action.type) {
-    case UPDATE_SCROLLBAR:
-      return {
-        ...state,
-        [payload.state]: {
-          ...state[payload.state],
-          scrollbar: {
-            ...state[payload.state].scrollbar,
-            [payload.name]: payload.value,
-          },
-        },
-      };
-    case UPDATE_TRACK:
-      return {
-        ...state,
-        [payload.state]: {
-          ...state[payload.state],
-          track: {
-            ...state[payload.state].track,
-            [payload.name]: payload.value,
-          },
-        },
-      };
-    case UPDATE_THUMB:
-      console.log(action.payload);
-
-      return {
-        ...state,
-        [payload.state]: {
-          ...state[payload.state],
-          thumb: {
-            ...state[payload.state].thumb,
-            [payload.name]: payload.value,
-          },
-        },
-      };
-    case ADD_PROPERTY:
-      return {
-        ...state,
-        [payload.name]: {
-          ...[payload.name],
-          ...payload.value,
-        },
-      };
-    default:
-      return state;
-  }
+const reducer = (state: ReducerState, action: ReducerActions): ReducerState => {
+  return produce(state, draft => {
+    switch (action.type) {
+      case ActionTypes.UPDATE_PROPERTY:
+        const toUpdateProperty = draft[action.option].find(
+          prop => prop.id === action.payload.id,
+        );
+        if (!!toUpdateProperty) toUpdateProperty.value = action.payload.value;
+        break;
+      case ActionTypes.ADD_PROPERTY:
+        draft[action.option].push(action.payload);
+        break;
+    }
+  });
 };
 
 export default reducer;
