@@ -1,19 +1,22 @@
-import { ActionTypes, ReducerActions } from './types';
+import { ActionTypes, ActionPayload, ActionPayloadWithProperty } from './types';
 
-export const updatePropertyAction = (
-  option: any,
-  payload: any,
-): ReducerActions => ({
-  type: ActionTypes.UPDATE_PROPERTY,
-  option,
-  payload,
-});
+export const updatePropertyAction = (option: string, payload: ActionPayload) =>
+  ({
+    type: ActionTypes.UPDATE_PROPERTY,
+    option,
+    payload,
+  } as const);
 
 export const addPropertyAction = (
-  option: any,
-  payload: any,
-): ReducerActions => ({
-  type: ActionTypes.ADD_PROPERTY,
-  option,
-  payload,
-});
+  option: string,
+  payload: ActionPayloadWithProperty,
+) =>
+  ({
+    type: ActionTypes.ADD_PROPERTY,
+    option,
+    payload,
+  } as const);
+
+export type Action = ReturnType<
+  typeof updatePropertyAction | typeof addPropertyAction
+>;

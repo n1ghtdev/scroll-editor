@@ -11,38 +11,26 @@ export enum PropertyInputType {
   boxShadow = '',
   border = 'border',
 }
-interface BaseAction {
-  type: ActionTypes;
-  option: 'scrollbar' | 'track' | 'thumb';
-}
-interface ActionPayload {
+
+export interface ActionPayload {
   id: number;
   value: string | number;
 }
-interface ActionPayloadWithProperty extends ActionPayload {
+export interface ActionPayloadWithProperty extends ActionPayload {
   id: number;
   value: string | number;
   property: string;
 }
-export interface UpdateAction extends BaseAction {
-  type: ActionTypes.UPDATE_PROPERTY;
-  payload: ActionPayload;
-}
-export interface AddAction extends BaseAction {
-  type: ActionTypes.ADD_PROPERTY;
-  payload: ActionPayloadWithProperty;
-}
 
-export type ReducerActions = UpdateAction | AddAction;
-
-export type ScrollOptions = {
-  id: number;
-  value: string | number;
-  property?: string;
+export type OptionProperty = {
+  option: string;
+  props: Array<{
+    id: number;
+    value: string | number;
+    property?: string;
+  }>;
 };
 
 export interface ReducerState {
-  scrollbar: ScrollOptions[];
-  track: ScrollOptions[];
-  thumb: ScrollOptions[];
+  [key: string]: OptionProperty;
 }

@@ -4,17 +4,17 @@ import { css, jsx } from '@emotion/core';
 import { ChromePicker } from 'react-color';
 
 interface ColorPickerProps {
-  color: any;
+  value: any;
   onChange: (color: any) => void;
-  name: string;
 }
 
-const ColorPicker = ({ color, onChange, name }: ColorPickerProps) => {
+const ColorPicker = ({ value, onChange }: ColorPickerProps) => {
   return (
     <Popover
       trigger="click"
-      // move <ChromePicker /> outside, rename to ColorPickerPopup
-      content={<ChromePicker color={color} onChange={onChange} />}
+      // TODO: move <ChromePicker /> outside, rename to ColorPickerPopup
+      // TODO: || #000 looking so far so bad
+      content={<ChromePicker color={value || '#000'} onChange={onChange} />}
     >
       <Form.Item>
         <Button
@@ -22,10 +22,10 @@ const ColorPicker = ({ color, onChange, name }: ColorPickerProps) => {
             border: 1px solid #e1e1e1;
             border-radius: 4px;
             margin-right: 5px;
-            background-color: ${color};
+            background-color: ${value || '#000'};
             &:hover,
             &:focus {
-              background-color: ${color};
+              background-color: ${value || '#000'};
             }
           `}
         />
@@ -36,7 +36,7 @@ const ColorPicker = ({ color, onChange, name }: ColorPickerProps) => {
             font-weight: bold;
           `}
         >
-          {color}
+          {value || '#000'}
         </span>
       </Form.Item>
     </Popover>

@@ -1,68 +1,72 @@
-/** @jsx jsx */
 import React from 'react';
-import { Row, Col } from 'antd';
-import { css, jsx } from '@emotion/core';
+import { Form, Row, Col, Layout } from 'antd';
 
 import Container from './Container';
 import OptionsForm from './OptionsForm';
 import Preview from './Preview';
-
 import reducer from '../modules/scrollOptions/reducer';
 
 import { ReducerState } from '../modules/scrollOptions/types';
 
+// TODO: mv to separate file
 const initialState: ReducerState = {
-  scrollbar: [
-    { id: 0, property: 'width', value: 12 },
-    { id: 1, property: 'color', value: '#eeeeee' },
-  ],
-  track: [
-    { id: 0, property: 'radius', value: 0 },
-    { id: 1, property: 'color', value: 'red' },
-  ],
-  thumb: [
-    { id: 0, property: 'radius', value: 0 },
-    { id: 1, property: 'color', value: 'red' },
-  ],
+  scrollbar: {
+    option: 'scrollbar',
+    props: [
+      { id: 0, property: 'width', value: 12 },
+      // { id: 1, property: 'background-color', value: '#eeeeee' },
+    ],
+  },
+  'scrollbar-track': {
+    option: 'scrollbar-track',
+    props: [
+      { id: 0, property: 'border-radius', value: 0 },
+      { id: 1, property: 'background-color', value: 'red' },
+    ],
+  },
+  'scrollbar-thumb': {
+    option: 'scrollbar-thumb',
+    props: [
+      { id: 0, property: 'border-radius', value: 0 },
+      { id: 1, property: 'background-color', value: 'green' },
+    ],
+  },
 };
 
 const App = () => {
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
-  const styles = css`
-    &::-webkit-scrollbar {
-      width: 0px;
-      background-color: #000;
-    }
-    &::-webkit-scrollbar-track {
-      background-color: #000;
-      border-radius: 0px;
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: #000;
-      border-radius: 0px;
-      &:hover {
-        background-color: #000;
-      }
-      &:active {
-        background-color: #000;
-      }
-    }
-  `;
   return (
-    <Container>
-      <Row>
-        <Col>Header/Title of app</Col>
-      </Row>
-      <Row type="flex">
-        <Col span={12}>
-          <OptionsForm state={state} dispatch={dispatch} />
-        </Col>
-        <Col span={12}>
-          <Preview previewStyles={styles} />
-        </Col>
-      </Row>
-    </Container>
+    <Layout>
+      <Container>
+        <Layout.Header>
+          <Row>
+            <Col>Header/Title of app</Col>
+          </Row>
+        </Layout.Header>
+        <Layout.Content>
+          <Row type="flex">
+            <Col span={12}>
+              <Form layout="vertical">
+                <OptionsForm state={state.scrollbar} dispatch={dispatch} />
+                <OptionsForm
+                  state={state['scrollbar-track']}
+                  dispatch={dispatch}
+                />
+                <OptionsForm
+                  state={state['scrollbar-thumb']}
+                  dispatch={dispatch}
+                />
+              </Form>
+            </Col>
+            <Col span={12}>
+              <Preview options={state} />
+            </Col>
+          </Row>
+        </Layout.Content>
+        <Layout.Footer>n1ghtdev</Layout.Footer>
+      </Container>
+    </Layout>
   );
 };
 
