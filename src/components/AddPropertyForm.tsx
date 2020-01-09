@@ -77,7 +77,9 @@ const AddPropertyForm = (props: Props) => {
           onChange={(val: any) => handleSelectChange(val)}
         >
           {availableProperties.map(prop => (
-            <Select.Option value={prop.id}>{prop.property}</Select.Option>
+            <Select.Option key={prop.id} value={prop.id}>
+              {prop.property}
+            </Select.Option>
           ))}
         </Select>
         <DynamicInputComponent

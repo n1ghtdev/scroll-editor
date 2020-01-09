@@ -1,12 +1,13 @@
 /** @jsx jsx */
-import { Form, Collapse } from 'antd';
+import { Form } from 'antd';
 import { css, jsx } from '@emotion/core';
 
-import OptionItem from './OptionItem';
 import AddPropertyForm from './AddPropertyForm';
-import OptionsPropertyItem from './OptionsPropertyItem';
+import PropertyList from './PropertyList';
+import PropertyItem from './PropertyItem';
 
 import {
+  Property,
   OptionProperty,
   ActionPayloadWithProperty,
 } from '../modules/scrollOptions/types';
@@ -16,7 +17,22 @@ import {
   addPropertyAction,
 } from '../modules/scrollOptions/actions';
 
-const OptionsForm = ({
+const FormItem = ({ children }: { children: React.ReactNode }) => (
+  <Form.Item
+    label="Scrollbar"
+    css={css`
+      background-color: #eee;
+      padding: 0 20px;
+      .ant-form-item {
+        margin-bottom: 0 !important;
+      }
+    `}
+  >
+    {children}
+  </Form.Item>
+);
+
+const ScrollbarFormItem = ({
   state,
   dispatch,
 }: {
@@ -35,46 +51,33 @@ const OptionsForm = ({
   };
   const submitAddProperty = (values: any) => {
     addProperty({
-      id: generateID(),
+      id: generateID(state.props),
       ...values,
     });
   };
-  // TODO: provide func arg for props instead of accessing from closure
-  const generateID = () => {
-    const lastProperty = state.props[state.props.length - 1].id;
+  const generateID = (properties: Property[]) => {
+    const lastProperty = properties[properties.length - 1].id;
     return lastProperty + 1;
   };
   return (
-    <OptionItem>
-      <Collapse
-        bordered={false}
-        css={css`
-          .ant-collapse-header {
-            padding: 6px 16px !important;
-            padding-left: 40px !important;
-          }
-        `}
-      >
+    <FormItem>
+      <PropertyList>
         {state.props.map((prop: any) => (
-          <Collapse.Panel
-            header={prop.property}
+          <PropertyItem
             key={prop.id}
-            css={css`
-              text-transform: uppercase;
-              font-size: 12px;
-            `}
-          >
-            <OptionsPropertyItem property={prop} onChange={updateProperty} />
-          </Collapse.Panel>
+            header={prop.property}
+            property={prop}
+            onChange={updateProperty}
+          />
         ))}
-      </Collapse>
+      </PropertyList>
       <AddPropertyForm
         optionName={state.option}
         activeProperties={state.props.map(prop => prop.property)}
         onSubmit={(values: any) => submitAddProperty(values)}
       />
-    </OptionItem>
+    </FormItem>
   );
 };
 
-export default OptionsForm;
+export default ScrollbarFormItem;

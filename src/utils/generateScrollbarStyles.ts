@@ -21,7 +21,6 @@ export function generateScrollbarStyles(options: any) {
   const entries = Object.values(options);
   const styles = entries.map((entry: any) => {
     const props = createProperties(entry.props);
-    console.log(props);
 
     const pseudoElementWithProps = createWebkitPseudoElement(
       entry.option,

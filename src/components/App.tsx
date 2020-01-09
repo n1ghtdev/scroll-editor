@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Row, Col, Layout } from 'antd';
 
 import Container from './Container';
-import OptionsForm from './OptionsForm';
+import ScrollbarFormItem from './ScrollbarFormItem';
 import Preview from './Preview';
 import reducer from '../modules/scrollOptions/reducer';
 
@@ -48,12 +48,15 @@ const App = () => {
           <Row type="flex">
             <Col span={12}>
               <Form layout="vertical">
-                <OptionsForm state={state.scrollbar} dispatch={dispatch} />
-                <OptionsForm
+                <ScrollbarFormItem
+                  state={state.scrollbar}
+                  dispatch={dispatch}
+                />
+                <ScrollbarFormItem
                   state={state['scrollbar-track']}
                   dispatch={dispatch}
                 />
-                <OptionsForm
+                <ScrollbarFormItem
                   state={state['scrollbar-thumb']}
                   dispatch={dispatch}
                 />
