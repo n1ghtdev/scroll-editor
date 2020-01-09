@@ -22,13 +22,15 @@ export interface ActionPayloadWithProperty extends ActionPayload {
   property: string;
 }
 
+export type Property = {
+  id: number;
+  value: string | number;
+  property?: string;
+};
+
 export type OptionProperty = {
   option: string;
-  props: Array<{
-    id: number;
-    value: string | number;
-    property?: string;
-  }>;
+  props: Property[];
 };
 
 export interface ReducerState {

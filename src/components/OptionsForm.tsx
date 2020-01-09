@@ -2,10 +2,9 @@
 import { Form, Collapse } from 'antd';
 import { css, jsx } from '@emotion/core';
 
-import ColorPicker from './ColorPicker';
-import InputRange from './InputRange';
 import OptionItem from './OptionItem';
 import AddPropertyForm from './AddPropertyForm';
+import OptionsPropertyItem from './OptionsPropertyItem';
 
 import {
   OptionProperty,
@@ -56,52 +55,18 @@ const OptionsForm = ({
           }
         `}
       >
-        {state.props.map((prop: any) => {
-          // TODO: make util func get type of item by property
-          // or TODO: useInputComponent, same logic as in AddPropertyForm
-          if (prop.property === 'width') {
-            return (
-              <Collapse.Panel
-                header={prop.property}
-                key={prop.id}
-                css={css`
-                  text-transform: uppercase;
-                  font-size: 12px;
-                `}
-              >
-                <Form.Item>
-                  <InputRange
-                    value={prop.value}
-                    onChange={(value: any) => {
-                      console.log(value);
-                      updateProperty(prop.id, value);
-                    }}
-                  />
-                </Form.Item>
-              </Collapse.Panel>
-            );
-          } else if (prop.property === 'background-color') {
-            return (
-              <Collapse.Panel
-                header={prop.property}
-                key={prop.id}
-                css={css`
-                  text-transform: uppercase;
-                  font-size: 12px;
-                `}
-              >
-                <Form.Item>
-                  <ColorPicker
-                    value={prop.value}
-                    onChange={(color: any) =>
-                      updateProperty(prop.id, color.hex)
-                    }
-                  />
-                </Form.Item>
-              </Collapse.Panel>
-            );
-          }
-        })}
+        {state.props.map((prop: any) => (
+          <Collapse.Panel
+            header={prop.property}
+            key={prop.id}
+            css={css`
+              text-transform: uppercase;
+              font-size: 12px;
+            `}
+          >
+            <OptionsPropertyItem property={prop} onChange={updateProperty} />
+          </Collapse.Panel>
+        ))}
       </Collapse>
       <AddPropertyForm
         optionName={state.option}

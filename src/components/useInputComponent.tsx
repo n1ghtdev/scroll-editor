@@ -1,16 +1,16 @@
 import React from 'react';
 import { Input } from 'antd';
-import { FormTypes } from '../types';
+import { InputTypes } from '../types';
 import ColorPicker from './ColorPicker';
 import InputRange from './InputRange';
 
 const components = {
-  [FormTypes.input]: Input,
-  [FormTypes.colorpicker]: ColorPicker,
-  [FormTypes.inputslider]: InputRange,
+  [InputTypes.input]: Input,
+  [InputTypes.colorpicker]: ColorPicker,
+  [InputTypes.inputslider]: InputRange,
 };
 
-const useInputComponent = (type: FormTypes) => {
+const useInputComponent = (type: InputTypes) => {
   const [value, setValue] = React.useState();
 
   React.useEffect(() => {
@@ -27,7 +27,7 @@ const useInputComponent = (type: FormTypes) => {
     }
   };
 
-  const Component = (components as any)[type as keyof typeof FormTypes];
+  const Component = (components as any)[type as keyof typeof InputTypes];
 
   return [Component, value, onChange, () => setValue(null)];
 };

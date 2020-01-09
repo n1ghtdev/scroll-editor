@@ -2,7 +2,7 @@
 import React from 'react';
 import { Form, Input, Button, Select } from 'antd';
 import { css, jsx } from '@emotion/core';
-import { FormTypes } from '../types';
+import { InputTypes } from '../types';
 import useInputComponent from './useInputComponent';
 
 type Props = {
@@ -13,16 +13,16 @@ type Props = {
 
 // TODO: add available properties to reducer to each option it's own properties
 const properties = [
-  { id: 0, property: 'width', formType: FormTypes.inputslider },
-  { id: 1, property: 'background-color', formType: FormTypes.colorpicker },
-  { id: 2, property: 'border-radius', formType: FormTypes.input },
-  { id: 3, property: 'border', formType: FormTypes.input },
-  { id: 4, property: 'box-shadow', formType: FormTypes.input },
+  { id: 0, property: 'width', formType: InputTypes.inputslider },
+  { id: 1, property: 'background-color', formType: InputTypes.colorpicker },
+  { id: 2, property: 'border-radius', formType: InputTypes.input },
+  { id: 3, property: 'border', formType: InputTypes.input },
+  { id: 4, property: 'box-shadow', formType: InputTypes.input },
 ];
 
 const AddPropertyForm = (props: Props) => {
   const getPropertyType = (property: any) =>
-    property ? property.formType : FormTypes.input;
+    property ? property.formType : InputTypes.input;
 
   const [activeProperty, setActiveProperty] = React.useState();
   const [
