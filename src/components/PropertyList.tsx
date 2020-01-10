@@ -2,10 +2,18 @@
 import { Collapse } from 'antd';
 import { css, jsx } from '@emotion/core';
 
-const PropertyList = ({ children }: { children: React.ReactNode }) => {
+const PropertyList = ({
+  children,
+  defaultActiveKey,
+}: {
+  children: React.ReactNode;
+  defaultActiveKey: number[];
+}) => {
   return (
     <Collapse
       bordered={false}
+      defaultActiveKey={defaultActiveKey}
+      onChange={(key: any) => console.log(key)}
       css={css`
         .ant-collapse-header {
           padding: 6px 16px !important;

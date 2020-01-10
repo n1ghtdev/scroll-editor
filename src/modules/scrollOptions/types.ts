@@ -10,15 +10,14 @@ export interface ActionPayload {
   id: number;
   value: string | number;
 }
-export interface ActionPayloadWithProperty extends ActionPayload {
+export interface ActionPayloadWithProperty {
   id: number;
-  value: string | number;
   property: string;
 }
 
 export type Property = {
   id: number;
-  value: string | number;
+  value?: string | number;
   property?: string;
 };
 

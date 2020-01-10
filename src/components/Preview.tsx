@@ -6,10 +6,10 @@ import { generateScrollbarStyles } from '../utils/generateScrollbarStyles';
 
 const Preview = ({ options }: { options: any }) => {
   // TODO: ref vs state
-  const styles = React.useRef(generateScrollbarStyles(options));
+  const [styles, setStyles] = React.useState(generateScrollbarStyles(options));
 
   React.useEffect(() => {
-    styles.current = generateScrollbarStyles(options);
+    setStyles(generateScrollbarStyles(options));
   }, [options]);
 
   return (
@@ -21,7 +21,7 @@ const Preview = ({ options }: { options: any }) => {
           width: 100%;
           background-color: #f5f5f5;
           overflow-y: scroll;
-          ${styles.current}
+          ${styles}
         `}
       >
         <div
@@ -31,7 +31,7 @@ const Preview = ({ options }: { options: any }) => {
         />
       </div>
       <textarea rows={20} style={{ width: '500px' }}>
-        {JSON.stringify(styles.current)}
+        {styles?.join('')}
       </textarea>
     </React.Fragment>
   );

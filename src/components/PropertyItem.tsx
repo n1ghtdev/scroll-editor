@@ -21,9 +21,6 @@ const PropertyItem = ({
   // TODO: propably should fix reducer/action typings
   const propertyName = property.property || 'width';
 
-  // useInputComponent also returns state value and function for set state
-  // but in this case onChange event handler uses reducer dispatch
-  // and reducer value
   const [Component] = useInputComponent(PropertyTypes[propertyName]);
 
   return (
@@ -39,7 +36,7 @@ const PropertyItem = ({
       <Component
         value={property.value}
         onChange={(value: any) =>
-          onChange(property.id, value.hex ? value.hex : value)
+          onChange(property.id, value.hex ? value.hex : ~~+value.target.value)
         }
       />
     </Collapse.Panel>

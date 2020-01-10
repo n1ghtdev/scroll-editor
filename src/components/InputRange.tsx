@@ -27,14 +27,14 @@ const Range = (props: InputRangeProps) => {
 
 const InputRange = (props: InputRangeProps) => {
   return (
-    <>
+    <div style={{ width: '250px ' }}>
       <Col span={16}>
         <Range value={props.value} onChange={props.onChange} />
       </Col>
       <Col span={8}>
         <Input value={props.value} onChange={props.onChange} />
       </Col>
-    </>
+    </div>
   );
 };
 

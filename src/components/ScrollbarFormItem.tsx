@@ -49,19 +49,18 @@ const ScrollbarFormItem = ({
   const addProperty = (payload: ActionPayloadWithProperty) => {
     dispatch(addPropertyAction(state.option, payload));
   };
-  const submitAddProperty = (values: any) => {
+  const submitAddProperty = (property: string) =>
     addProperty({
       id: generateID(state.props),
-      ...values,
+      property,
     });
-  };
   const generateID = (properties: Property[]) => {
     const lastProperty = properties[properties.length - 1].id;
     return lastProperty + 1;
   };
   return (
     <FormItem>
-      <PropertyList>
+      <PropertyList defaultActiveKey={state.props.map((prop: any) => prop.id)}>
         {state.props.map((prop: any) => (
           <PropertyItem
             key={prop.id}

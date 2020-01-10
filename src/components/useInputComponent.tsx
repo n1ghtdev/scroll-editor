@@ -1,35 +1,21 @@
-import React from 'react';
 import { Input } from 'antd';
 import { InputTypes } from '../types';
+
 import ColorPicker from './ColorPicker';
 import InputRange from './InputRange';
+import BorderInput from './BorderInput';
 
 const components = {
   [InputTypes.input]: Input,
   [InputTypes.colorpicker]: ColorPicker,
-  [InputTypes.inputslider]: InputRange,
+  [InputTypes.inputrange]: InputRange,
+  [InputTypes.border]: BorderInput,
 };
 
 const useInputComponent = (type: InputTypes) => {
-  const [value, setValue] = React.useState();
-
-  React.useEffect(() => {
-    setValue(null);
-  }, [type]);
-
-  const onChange = (e: any) => {
-    if (e.hasOwnProperty('target')) {
-      setValue(e.target.value);
-    } else if (e.hasOwnProperty('hex')) {
-      setValue(e.hex);
-    } else {
-      setValue(e);
-    }
-  };
-
   const Component = (components as any)[type as keyof typeof InputTypes];
 
-  return [Component, value, onChange, () => setValue(null)];
+  return [Component];
 };
 
 export default useInputComponent;

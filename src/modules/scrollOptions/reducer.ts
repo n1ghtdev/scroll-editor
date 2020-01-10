@@ -14,7 +14,12 @@ const reducer = (state: ReducerState, action: Action): ReducerState => {
         break;
       case ActionTypes.ADD_PROPERTY:
         // TODO: prevent from adding duplicates
-        draft[action.option].props.push(action.payload);
+        console.log(action);
+
+        draft[action.option].props.push({
+          ...action.payload,
+          value: undefined,
+        });
         break;
       // TODO: add remove
     }
