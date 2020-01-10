@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import React from 'react';
+import { Input } from 'antd';
 import { css, jsx } from '@emotion/core';
 
 import { generateScrollbarStyles } from '../utils/generateScrollbarStyles';
@@ -17,7 +18,7 @@ const Preview = ({ options }: { options: any }) => {
       Scroll preview/code
       <div
         css={css`
-          height: 100%;
+          height: 60%;
           width: 100%;
           background-color: #f5f5f5;
           overflow-y: scroll;
@@ -30,9 +31,7 @@ const Preview = ({ options }: { options: any }) => {
           `}
         />
       </div>
-      <textarea rows={20} style={{ width: '500px' }}>
-        {styles?.join('')}
-      </textarea>
+      <Input.TextArea rows={10} value={styles?.join('')} />
     </React.Fragment>
   );
 };

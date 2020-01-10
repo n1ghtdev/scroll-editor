@@ -18,7 +18,6 @@ const reducer = (state: ReducerState, action: Action): ReducerState => {
 
         draft[action.option].props.push({
           ...action.payload,
-          value: undefined,
         });
         break;
       // TODO: add remove

@@ -8,16 +8,17 @@ export enum ActionTypes {
 
 export interface ActionPayload {
   id: number;
-  value: string | number;
+  value: any;
 }
 export interface ActionPayloadWithProperty {
   id: number;
   property: string;
+  value?: any;
 }
 
 export type Property = {
   id: number;
-  value?: string | number;
+  value?: any;
   property?: string;
 };
 

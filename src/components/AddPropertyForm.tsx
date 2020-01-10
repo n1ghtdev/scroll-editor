@@ -4,16 +4,20 @@ import { Form, Input, Button, Select } from 'antd';
 import { css, jsx } from '@emotion/core';
 
 type Props = {
-  onSubmit: (values: any) => void;
+  onSubmit: (property: string, value?: any) => void;
   optionName: string;
   activeProperties: any;
 };
 
 const properties = [
   { id: 0, name: 'width' },
-  { id: 1, name: 'background-color' },
+  { id: 1, name: 'background-color', value: '#000' },
   { id: 2, name: 'border-radius' },
-  { id: 3, name: 'border' },
+  {
+    id: 3,
+    name: 'border',
+    value: { width: null, color: '#000' },
+  },
   { id: 4, name: 'box-shadow' },
 ];
 
@@ -29,14 +33,16 @@ const AddPropertyForm = (props: Props) => {
 
   const sumbitWithValues = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(activeProperty);
 
     if (typeof activeProperty === 'number') {
       const property = properties.find(
         (prop: any) => prop.id === activeProperty,
-      )?.name;
+      );
 
-      props.onSubmit(property || properties[0]);
+      props.onSubmit(
+        property?.name || properties[0].name,
+        property?.value || undefined,
+      );
 
       setActiveProperty(
         availableProperties.find(el => el.id !== activeProperty)?.id || null,
@@ -56,6 +62,7 @@ const AddPropertyForm = (props: Props) => {
         <Select
           placeholder="Choose property"
           style={{ width: '30%' }}
+          value={activeProperty}
           onChange={(val: any) => setActiveProperty(val)}
         >
           {availableProperties.map(prop => (

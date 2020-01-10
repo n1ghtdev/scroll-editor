@@ -8,28 +8,18 @@ import reducer from '../modules/scrollOptions/reducer';
 
 import { ReducerState } from '../modules/scrollOptions/types';
 
-// TODO: mv to separate file
 const initialState: ReducerState = {
   scrollbar: {
     option: 'scrollbar',
-    props: [
-      { id: 0, property: 'width', value: 12 },
-      // { id: 1, property: 'background-color', value: '#eeeeee' },
-    ],
+    props: [{ id: 0, property: 'width', value: 12 }],
   },
   'scrollbar-track': {
     option: 'scrollbar-track',
-    props: [
-      { id: 0, property: 'border-radius', value: 0 },
-      { id: 1, property: 'background-color', value: 'red' },
-    ],
+    props: [{ id: 0, property: 'background-color', value: 'red' }],
   },
   'scrollbar-thumb': {
     option: 'scrollbar-thumb',
-    props: [
-      { id: 0, property: 'border-radius', value: 0 },
-      { id: 1, property: 'background-color', value: 'green' },
-    ],
+    props: [{ id: 0, property: 'background-color', value: 'green' }],
   },
 };
 

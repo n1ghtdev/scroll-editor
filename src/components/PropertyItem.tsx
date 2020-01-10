@@ -35,9 +35,14 @@ const PropertyItem = ({
     >
       <Component
         value={property.value}
-        onChange={(value: any) =>
-          onChange(property.id, value.hex ? value.hex : ~~+value.target.value)
-        }
+        onChange={(value: any) => {
+          console.log(value);
+
+          onChange(
+            property.id,
+            value.hex ? value.hex : value.target ? value.target.value : value,
+          );
+        }}
       />
     </Collapse.Panel>
   );

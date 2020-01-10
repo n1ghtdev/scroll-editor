@@ -17,11 +17,16 @@ import {
   addPropertyAction,
 } from '../modules/scrollOptions/actions';
 
-const FormItem = ({ children }: { children: React.ReactNode }) => (
+const FormItem = ({
+  children,
+  label,
+}: {
+  children: React.ReactNode;
+  label: string;
+}) => (
   <Form.Item
-    label="Scrollbar"
+    label={label}
     css={css`
-      background-color: #eee;
       padding: 0 20px;
       .ant-form-item {
         margin-bottom: 0 !important;
@@ -49,17 +54,20 @@ const ScrollbarFormItem = ({
   const addProperty = (payload: ActionPayloadWithProperty) => {
     dispatch(addPropertyAction(state.option, payload));
   };
-  const submitAddProperty = (property: string) =>
+  const submitAddProperty = (property: string, value?: any) => {
     addProperty({
       id: generateID(state.props),
       property,
+      value,
     });
+  };
+
   const generateID = (properties: Property[]) => {
     const lastProperty = properties[properties.length - 1].id;
     return lastProperty + 1;
   };
   return (
-    <FormItem>
+    <FormItem label={state.option}>
       <PropertyList defaultActiveKey={state.props.map((prop: any) => prop.id)}>
         {state.props.map((prop: any) => (
           <PropertyItem
@@ -73,7 +81,9 @@ const ScrollbarFormItem = ({
       <AddPropertyForm
         optionName={state.option}
         activeProperties={state.props.map(prop => prop.property)}
-        onSubmit={(values: any) => submitAddProperty(values)}
+        onSubmit={(property: string, value?: any) =>
+          submitAddProperty(property, value)
+        }
       />
     </FormItem>
   );
