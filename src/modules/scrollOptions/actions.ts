@@ -17,6 +17,15 @@ export const addPropertyAction = (
     payload,
   } as const);
 
+export const removePropertyAction = (option: string, id: number) =>
+  ({
+    type: ActionTypes.REMOVE_PROPERTY,
+    option,
+    id,
+  } as const);
+
 export type Action = ReturnType<
-  typeof updatePropertyAction | typeof addPropertyAction
+  | typeof updatePropertyAction
+  | typeof addPropertyAction
+  | typeof removePropertyAction
 >;

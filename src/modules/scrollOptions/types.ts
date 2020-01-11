@@ -1,9 +1,7 @@
-export const UPDATE_PROPERTY = 'update';
-export const ADD_PROPERTY = 'add';
-
 export enum ActionTypes {
   UPDATE_PROPERTY = 'update',
   ADD_PROPERTY = 'add',
+  REMOVE_PROPERTY = 'remove',
 }
 
 export interface ActionPayload {

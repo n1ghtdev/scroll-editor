@@ -1,15 +1,15 @@
 export enum InputTypes {
   input = 'input',
-  inputrange = 'inputrange',
-  colorpicker = 'colorpicker',
-  inputcolor = 'inputcolor',
+  inputRange = 'inputRange',
+  colorPicker = 'colorPicker',
   border = 'border',
+  boxShadow = 'boxShadow',
 }
 
 export const PropertyTypes: any = {
-  width: InputTypes.input,
-  'background-color': InputTypes.colorpicker,
-  'border-radius': InputTypes.input,
+  width: InputTypes.inputRange,
+  'background-color': InputTypes.colorPicker,
+  'border-radius': InputTypes.inputRange,
   border: InputTypes.border,
-  'box-shadow': InputTypes.input,
+  'box-shadow': InputTypes.boxShadow,
 };

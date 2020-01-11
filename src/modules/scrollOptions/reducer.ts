@@ -14,13 +14,17 @@ const reducer = (state: ReducerState, action: Action): ReducerState => {
         break;
       case ActionTypes.ADD_PROPERTY:
         // TODO: prevent from adding duplicates
-        console.log(action);
-
         draft[action.option].props.push({
           ...action.payload,
         });
         break;
-      // TODO: add remove
+      case ActionTypes.REMOVE_PROPERTY:
+        const props = draft[action.option].props;
+        props.splice(
+          props.findIndex(prop => prop.id === action.id),
+          1,
+        );
+        break;
     }
   });
 };

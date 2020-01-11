@@ -10,15 +10,23 @@ type Props = {
 };
 
 const properties = [
-  { id: 0, name: 'width' },
+  { id: 0, name: 'width', value: 1 },
   { id: 1, name: 'background-color', value: '#000' },
-  { id: 2, name: 'border-radius' },
+  {
+    id: 2,
+    name: 'border-radius',
+    value: 1,
+  },
   {
     id: 3,
     name: 'border',
-    value: { width: null, color: '#000' },
+    value: { width: 1, color: '#000' },
   },
-  { id: 4, name: 'box-shadow' },
+  {
+    id: 4,
+    name: 'box-shadow',
+    value: { x: 1, y: 1, blur: 0, spread: 2, color: 'blue', inset: false },
+  },
 ];
 
 const AddPropertyForm = (props: Props) => {
@@ -39,10 +47,12 @@ const AddPropertyForm = (props: Props) => {
         (prop: any) => prop.id === activeProperty,
       );
 
-      props.onSubmit(
-        property?.name || properties[0].name,
-        property?.value || undefined,
-      );
+      const name = property?.name;
+      const value = property?.value;
+
+      if (!name) return;
+
+      props.onSubmit(name, value);
 
       setActiveProperty(
         availableProperties.find(el => el.id !== activeProperty)?.id || null,

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Input, Select } from 'antd';
+
+import InputNumberPx from './InputNumberPx';
 import ColorPicker from './ColorPicker';
 
 const borderStyles = [
@@ -26,13 +28,13 @@ const BorderInput = ({
 
   return (
     <Input.Group compact>
-      <Input
-        style={{ width: '30%' }}
+      <InputNumberPx
+        min={0}
+        width="30%"
         value={value.width}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          const val = e.target.value;
-          onChange({ ...value, width: ~~+val });
-        }}
+        onChange={(val: number | undefined) =>
+          onChange({ ...value, width: val })
+        }
       />
       <Select
         placeholder="style"

@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { Collapse } from 'antd';
+import { Collapse, Icon } from 'antd';
 import { css, jsx } from '@emotion/core';
 
 import useInputComponent from './useInputComponent';
@@ -9,10 +9,12 @@ import { Property } from '../modules/scrollOptions/types';
 const PropertyItem = ({
   property,
   onChange,
+  onDelete,
   ...props
 }: {
   property: Property;
-  onChange: (id: number, value: string) => null;
+  onChange: (id: number, value: string) => void;
+  onDelete: () => void;
   [key: string]: any;
 }) => {
   // BUG: set to 'width' if no value
@@ -23,10 +25,22 @@ const PropertyItem = ({
 
   const [Component] = useInputComponent(PropertyTypes[propertyName]);
 
+  const handleDelete = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation();
+    onDelete();
+  };
+
   return (
     <Collapse.Panel
       key={props.key}
       header={props.header}
+      extra={
+        <Icon
+          onClick={handleDelete}
+          style={{ fontSize: '16px' }}
+          type="close"
+        />
+      }
       {...props}
       css={css`
         text-transform: uppercase;

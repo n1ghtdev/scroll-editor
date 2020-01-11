@@ -18,7 +18,7 @@ const Preview = ({ options }: { options: any }) => {
       Scroll preview/code
       <div
         css={css`
-          height: 60%;
+          height: 70%;
           width: 100%;
           background-color: #f5f5f5;
           overflow-y: scroll;
@@ -31,7 +31,13 @@ const Preview = ({ options }: { options: any }) => {
           `}
         />
       </div>
-      <Input.TextArea rows={10} value={styles?.join('')} />
+      <Input.TextArea
+        css={css`
+          margin-top: 15px;
+        `}
+        autoSize={true}
+        value={styles?.join('')}
+      />
     </React.Fragment>
   );
 };

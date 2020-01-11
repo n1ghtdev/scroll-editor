@@ -15,6 +15,7 @@ import {
 import {
   updatePropertyAction,
   addPropertyAction,
+  removePropertyAction,
 } from '../modules/scrollOptions/actions';
 
 const FormItem = ({
@@ -25,9 +26,19 @@ const FormItem = ({
   label: string;
 }) => (
   <Form.Item
-    label={label}
+    label={
+      <span
+        css={css`
+          text-transform: uppercase;
+          font-weight: 500;
+        `}
+      >
+        {label}
+      </span>
+    }
     css={css`
       padding: 0 20px;
+      margin-bottom: 0 !important;
       .ant-form-item {
         margin-bottom: 0 !important;
       }
@@ -63,7 +74,7 @@ const ScrollbarFormItem = ({
   };
 
   const generateID = (properties: Property[]) => {
-    const lastProperty = properties[properties.length - 1].id;
+    const lastProperty = properties[properties.length - 1]?.id || 0;
     return lastProperty + 1;
   };
   return (
@@ -75,6 +86,9 @@ const ScrollbarFormItem = ({
             header={prop.property}
             property={prop}
             onChange={updateProperty}
+            onDelete={() =>
+              dispatch(removePropertyAction(state.option, prop.id))
+            }
           />
         ))}
       </PropertyList>
