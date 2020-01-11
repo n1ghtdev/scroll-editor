@@ -1,0 +1,8 @@
+☐ debounce color change event
+☐ disable AddPropertyForm if not properties available
+☐ change hex colors to rgba
+☐ add linear-gradients
+☐ add hover, active state of scrollbar
+☐ add cross browser scrollbar styles/js
+☐ add cross browser scrollbar preview
+☐ write tests

@@ -3,15 +3,15 @@ import { InputTypes } from '../types';
 
 import ColorPicker from './ColorPicker';
 import InputRange from './InputRange';
-import BorderInput from './BorderInput';
-import BoxShadowInput from './BoxShadowInput';
+import InputBorder from './InputBorder';
+import InputBoxShadow from './InputBoxShadow';
 
 const components = {
   [InputTypes.input]: Input,
   [InputTypes.colorPicker]: ColorPicker,
   [InputTypes.inputRange]: InputRange,
-  [InputTypes.border]: BorderInput,
-  [InputTypes.boxShadow]: BoxShadowInput,
+  [InputTypes.border]: InputBorder,
+  [InputTypes.boxShadow]: InputBoxShadow,
 };
 
 const useInputComponent = (type: InputTypes) => {

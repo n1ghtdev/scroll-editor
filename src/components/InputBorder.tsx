@@ -15,7 +15,7 @@ const borderStyles = [
   { id: 7, name: 'outset' },
 ];
 
-const BorderInput = ({
+const InputBorder = ({
   value,
   onChange,
 }: {
@@ -61,4 +61,4 @@ const BorderInput = ({
   );
 };
 
-export default BorderInput;
+export default InputBorder;

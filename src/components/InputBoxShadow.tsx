@@ -4,7 +4,7 @@ import { Input, InputNumber, Checkbox } from 'antd';
 import InputNumberPx from './InputNumberPx';
 import ColorPicker from './ColorPicker';
 
-const BoxShadowInput = ({
+const InputBoxShadow = ({
   value,
   onChange,
 }: {
@@ -53,4 +53,4 @@ const BoxShadowInput = ({
   );
 };
 
-export default BoxShadowInput;
+export default InputBoxShadow;
