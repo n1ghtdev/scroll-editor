@@ -1,4 +1,4 @@
-☐ debounce color change event
+✔ debounce color change event @done(20-01-17 00:49)
 ☐ disable AddPropertyForm if not properties available
 ☐ change hex colors to rgba
 ☐ add linear-gradients

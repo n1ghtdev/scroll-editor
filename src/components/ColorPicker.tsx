@@ -2,6 +2,7 @@
 import { Form, Popover, Button } from 'antd';
 import { css, jsx } from '@emotion/core';
 import { ChromePicker } from 'react-color';
+import { debounce } from 'throttle-debounce';
 
 interface ColorPickerProps {
   value: any;
@@ -14,7 +15,12 @@ const ColorPicker = ({ value, onChange }: ColorPickerProps) => {
       trigger="click"
       // TODO: move <ChromePicker /> outside, rename to ColorPickerPopup
       // TODO: || #000 looking so far so bad
-      content={<ChromePicker color={value || '#000'} onChange={onChange} />}
+      content={
+        <ChromePicker
+          color={value || '#000'}
+          onChange={debounce(200, onChange)}
+        />
+      }
     >
       <Form.Item>
         <Button
