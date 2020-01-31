@@ -1,5 +1,5 @@
-import React from 'react';
-import { Col, Slider, InputNumber } from 'antd';
+import React from "react";
+import { Col, Row, Slider, InputNumber } from "antd";
 
 interface InputRangeProps {
   value: any;
@@ -12,7 +12,7 @@ const Input = (props: InputRangeProps) => {
       min={1}
       max={25}
       formatter={(value: any) => `${value}px`}
-      parser={(value: any) => value.replace('px', '')}
+      parser={(value: any) => value.replace("px", "")}
       value={props.value}
       onChange={props.onChange}
     />
@@ -27,14 +27,14 @@ const Range = (props: InputRangeProps) => {
 
 const InputRange = (props: InputRangeProps) => {
   return (
-    <div style={{ width: '250px ' }}>
+    <Row style={{ width: "250px " }}>
       <Col span={16}>
         <Range value={props.value} onChange={props.onChange} />
       </Col>
       <Col span={8}>
         <Input value={props.value} onChange={props.onChange} />
       </Col>
-    </div>
+    </Row>
   );
 };
 
