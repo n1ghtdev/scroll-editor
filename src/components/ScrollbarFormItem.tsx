@@ -1,26 +1,26 @@
 /** @jsx jsx */
-import { Form } from "antd";
-import { css, jsx } from "@emotion/core";
+import { Form } from 'antd';
+import { css, jsx } from '@emotion/core';
 
-import AddPropertyForm from "./AddPropertyForm";
-import PropertyList from "./PropertyList";
-import PropertyItem from "./PropertyItem";
+import AddPropertyForm from './AddPropertyForm';
+import PropertyList from './PropertyList';
+import PropertyItem from './PropertyItem';
 
 import {
   Property,
   OptionProperty,
-  ActionPayloadWithProperty
-} from "../modules/scrollOptions/types";
+  ActionPayloadWithProperty,
+} from '../modules/types';
 
 import {
   updatePropertyAction,
   addPropertyAction,
-  removePropertyAction
-} from "../modules/scrollOptions/actions";
+  removePropertyAction,
+} from '../modules/actions';
 
 const FormItem = ({
   children,
-  label
+  label,
 }: {
   children: React.ReactNode;
   label: string;
@@ -53,7 +53,7 @@ const FormItem = ({
 
 const ScrollbarFormItem = ({
   state,
-  dispatch
+  dispatch,
 }: {
   state: OptionProperty;
   dispatch: any;
@@ -62,8 +62,8 @@ const ScrollbarFormItem = ({
     dispatch(
       updatePropertyAction(state.option, {
         id,
-        value
-      })
+        value,
+      }),
     );
   const addProperty = (payload: ActionPayloadWithProperty) => {
     dispatch(addPropertyAction(state.option, payload));
@@ -72,7 +72,7 @@ const ScrollbarFormItem = ({
     addProperty({
       id: generateID(state.props),
       property,
-      value
+      value,
     });
   };
 

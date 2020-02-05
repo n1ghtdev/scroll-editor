@@ -13,7 +13,6 @@ const PropertyList = ({
     <Collapse
       bordered={false}
       defaultActiveKey={defaultActiveKey}
-      onChange={(key: any) => console.log(key)}
       css={css`
         .ant-collapse-header {
           padding: 6px 16px !important;

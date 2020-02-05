@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, InputNumber, Checkbox } from 'antd';
+import { Input, Checkbox } from 'antd';
 
 import InputNumberPx from './InputNumberPx';
 import ColorPicker from './ColorPicker';
