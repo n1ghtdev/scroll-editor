@@ -4,7 +4,7 @@ import { css, jsx } from '@emotion/core';
 
 import useInputComponent from './useInputComponent';
 import { PropertyTypes } from '../types';
-import { Property } from '../modules/scrollOptions/types';
+import { Property } from '../modules/types';
 
 const PropertyItem = ({
   property,
@@ -50,8 +50,6 @@ const PropertyItem = ({
       <Component
         value={property.value}
         onChange={(value: any) => {
-          console.log(value);
-
           onChange(
             property.id,
             value.hex ? value.hex : value.target ? value.target.value : value,
