@@ -4,25 +4,23 @@ export enum ActionTypes {
   REMOVE_PROPERTY = 'remove',
 }
 
-export type ActionPayload = {
-  id: number;
+export type Property = {
   value: any;
-};
-export type ActionPayloadWithProperty = {
-  id: number;
-  property: string;
-  value?: any;
+  name: PropertyKeys;
 };
 
-export type Property = {
-  id: number;
-  value: any;
-  property: string;
-};
+export type PropertyKeys =
+  | 'width'
+  | 'border'
+  | 'border-radius'
+  | 'background-color'
+  | 'box-shadow';
+
+export type Properties = { [key in PropertyKeys]: Property };
 
 export type ScrollItem = {
-  name: string;
-  options: Property[];
+  name: ScrollKeys;
+  props: { [key: string]: any };
 };
 
 export type ScrollKeys = 'scrollbar' | 'scrollbar-track' | 'scrollbar-thumb';

@@ -3,7 +3,13 @@ import React from 'react';
 import Layout from './layout';
 
 import reducer from '../modules/reducer';
-import { State, Property, ScrollItem } from '../modules/types';
+import {
+  State,
+  Property,
+  ScrollItem,
+  PropertyKeys,
+  ScrollKeys,
+} from '../modules/types';
 import Preview from './preview';
 import Editor from './editor';
 import EditorItem from './editor-item';
@@ -11,49 +17,93 @@ import Options from './options';
 import Option from './option';
 import Range from './controls/range';
 import InputRange from './controls/input-range';
-import { updatePropertyAction } from '../modules/actions';
+import { updateAction } from '../modules/actions';
 
 const initialState: State = {
   scrollbar: {
     name: 'scrollbar',
-    options: [{ id: 0, property: 'width', value: 12 }],
+    props: { width: { name: 'width', value: 12 } },
   },
   'scrollbar-track': {
     name: 'scrollbar-track',
-    options: [{ id: 0, property: 'background-color', value: '#D4D4D4' }],
+    props: {
+      width: {
+        name: 'width',
+        value: 12,
+      },
+      'background-color': {
+        name: 'background-color',
+        value: '#D4D4D4',
+      },
+    },
   },
   'scrollbar-thumb': {
     name: 'scrollbar-thumb',
-    options: [{ id: 0, property: 'background-color', value: '#858C85' }],
+    props: {
+      width: {
+        name: 'width',
+        value: 12,
+      },
+      'background-color': {
+        name: 'background-color',
+        value: '#D4D4D4',
+      },
+      'border-radius': {
+        name: 'border-radius',
+        value: 4,
+      },
+      border: {
+        name: 'border',
+        value: { width: 1, style: 'solid', color: '#fff' },
+      },
+    },
   },
+};
+
+type RenderOptionProps = {
+  type: PropertyKeys;
+  scrollName: ScrollKeys;
 };
 
 const App = () => {
   const [state, dispatch] = React.useReducer(reducer, initialState);
-  console.log(state);
+
+  function renderOption({ type, scrollName }: RenderOptionProps) {
+    switch (type) {
+      case 'width':
+        return (
+          <InputRange
+            value={state[scrollName].props[type].value}
+            onChange={(value: number) =>
+              dispatch(
+                updateAction(scrollName, {
+                  name: type,
+                  value: Math.round(value),
+                }),
+              )
+            }
+          />
+        );
+      default:
+        return null;
+    }
+  }
 
   return (
     <Layout>
       <Editor>
-        <EditorItem title="::scrollbar">
-          <Options>
-            <Option title="width">
-              <InputRange
-                value={state['scrollbar'].options[0].value}
-                onChange={(value: number) => {
-                  console.log(state['scrollbar'].options[0]);
-
-                  dispatch(
-                    updatePropertyAction('scrollbar', {
-                      id: 0,
-                      value: Math.round(value),
-                    }),
-                  );
-                }}
-              />
-            </Option>
-          </Options>
-        </EditorItem>
+        {Object.values(state).map((item: ScrollItem) => (
+          <EditorItem title={item.name}>
+            <Options>
+              {Object.values(item.props).map((prop: Property) =>
+                renderOption({
+                  type: prop.name,
+                  scrollName: item.name,
+                }),
+              )}
+            </Options>
+          </EditorItem>
+        ))}
       </Editor>
       <Preview>test</Preview>
     </Layout>

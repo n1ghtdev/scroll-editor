@@ -7,9 +7,8 @@ const reducer = (state: State, action: Action): State => {
   return produce(state, (draft) => {
     switch (action.type) {
       case ActionTypes.UPDATE_PROPERTY:
-        const toUpdateProperty = draft[
-          action.option as ScrollKeys
-        ].options.find((prop) => prop.id === action.payload.id);
+        const toUpdateProperty =
+          draft[action.option as ScrollKeys].props[action.payload.name];
         if (!!toUpdateProperty) toUpdateProperty.value = action.payload.value;
         break;
       default:
