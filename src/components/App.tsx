@@ -1,57 +1,62 @@
 import React from 'react';
-import { Row, Col, Layout } from 'antd';
 
-import LayoutContainer from './LayoutContainer';
-import Header from './Header';
-import ScrollbarForm from './ScrollbarForm';
-import ScrollbarFormItem from './ScrollbarFormItem';
-import Preview from './Preview';
+import Layout from './layout';
 
 import reducer from '../modules/reducer';
-import { ReducerState } from '../modules/types';
+import { State, Property, ScrollItem } from '../modules/types';
+import Preview from './preview';
+import Editor from './editor';
+import EditorItem from './editor-item';
+import Options from './options';
+import Option from './option';
+import Range from './controls/range';
+import InputRange from './controls/input-range';
+import { updatePropertyAction } from '../modules/actions';
 
-const initialState: ReducerState = {
+const initialState: State = {
   scrollbar: {
-    option: 'scrollbar',
-    props: [{ id: 0, property: 'width', value: 12 }],
+    name: 'scrollbar',
+    options: [{ id: 0, property: 'width', value: 12 }],
   },
   'scrollbar-track': {
-    option: 'scrollbar-track',
-    props: [{ id: 0, property: 'background-color', value: '#D4D4D4' }],
+    name: 'scrollbar-track',
+    options: [{ id: 0, property: 'background-color', value: '#D4D4D4' }],
   },
   'scrollbar-thumb': {
-    option: 'scrollbar-thumb',
-    props: [{ id: 0, property: 'background-color', value: '#858C85' }],
+    name: 'scrollbar-thumb',
+    options: [{ id: 0, property: 'background-color', value: '#858C85' }],
   },
 };
 
 const App = () => {
   const [state, dispatch] = React.useReducer(reducer, initialState);
+  console.log(state);
 
   return (
-    <LayoutContainer>
-      <Header title="WebKit scrollbar generator" />
-      <Layout.Content style={{ paddingTop: '70px', height: '100%' }}>
-        <Row type="flex" gutter={[16, 0]} style={{ height: '100%' }}>
-          <Col span={12} style={{ height: '100%' }}>
-            <ScrollbarForm>
-              <ScrollbarFormItem state={state.scrollbar} dispatch={dispatch} />
-              <ScrollbarFormItem
-                state={state['scrollbar-track']}
-                dispatch={dispatch}
+    <Layout>
+      <Editor>
+        <EditorItem title="::scrollbar">
+          <Options>
+            <Option title="width">
+              <InputRange
+                value={state['scrollbar'].options[0].value}
+                onChange={(value: number) => {
+                  console.log(state['scrollbar'].options[0]);
+
+                  dispatch(
+                    updatePropertyAction('scrollbar', {
+                      id: 0,
+                      value: Math.round(value),
+                    }),
+                  );
+                }}
               />
-              <ScrollbarFormItem
-                state={state['scrollbar-thumb']}
-                dispatch={dispatch}
-              />
-            </ScrollbarForm>
-          </Col>
-          <Col span={12}>
-            <Preview options={state} />
-          </Col>
-        </Row>
-      </Layout.Content>
-    </LayoutContainer>
+            </Option>
+          </Options>
+        </EditorItem>
+      </Editor>
+      <Preview>test</Preview>
+    </Layout>
   );
 };
 

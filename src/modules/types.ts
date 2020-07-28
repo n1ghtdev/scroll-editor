@@ -4,27 +4,27 @@ export enum ActionTypes {
   REMOVE_PROPERTY = 'remove',
 }
 
-export interface ActionPayload {
+export type ActionPayload = {
   id: number;
   value: any;
-}
-export interface ActionPayloadWithProperty {
+};
+export type ActionPayloadWithProperty = {
   id: number;
   property: string;
   value?: any;
-}
+};
 
 export type Property = {
   id: number;
-  value?: any;
-  property?: string;
+  value: any;
+  property: string;
 };
 
-export type OptionProperty = {
-  option: string;
-  props: Property[];
+export type ScrollItem = {
+  name: string;
+  options: Property[];
 };
 
-export interface ReducerState {
-  [key: string]: OptionProperty;
-}
+export type ScrollKeys = 'scrollbar' | 'scrollbar-track' | 'scrollbar-thumb';
+
+export type State = { [key in ScrollKeys]: ScrollItem };

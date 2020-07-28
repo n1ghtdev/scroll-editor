@@ -1,8 +1,8 @@
 /** @jsx jsx */
-import React from "react";
-import { css, jsx } from "@emotion/core";
+import React from 'react';
+import { css, jsx } from '@emotion/core';
 
-const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div
       css={css`
@@ -20,4 +20,4 @@ const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default LayoutContainer;
+export default Layout;

@@ -8,7 +8,7 @@ import PropertyItem from './PropertyItem';
 
 import {
   Property,
-  OptionProperty,
+  ScrollItem,
   ActionPayloadWithProperty,
 } from '../modules/types';
 
@@ -55,22 +55,22 @@ const ScrollbarFormItem = ({
   state,
   dispatch,
 }: {
-  state: OptionProperty;
+  state: ScrollItem;
   dispatch: any;
 }) => {
   const updateProperty = (id: number, value: string) =>
     dispatch(
-      updatePropertyAction(state.option, {
+      updatePropertyAction(state.name, {
         id,
         value,
       }),
     );
   const addProperty = (payload: ActionPayloadWithProperty) => {
-    dispatch(addPropertyAction(state.option, payload));
+    dispatch(addPropertyAction(state.name, payload));
   };
   const submitAddProperty = (property: string, value?: any) => {
     addProperty({
-      id: generateID(state.props),
+      id: generateID(state.options),
       property,
       value,
     });
@@ -81,23 +81,23 @@ const ScrollbarFormItem = ({
     return lastProperty + 1;
   };
   return (
-    <FormItem label={state.option}>
-      <PropertyList defaultActiveKey={state.props.map((prop: any) => prop.id)}>
-        {state.props.map((prop: any) => (
+    <FormItem label={state.name}>
+      <PropertyList
+        defaultActiveKey={state.options.map((prop: any) => prop.id)}
+      >
+        {state.options.map((prop: any) => (
           <PropertyItem
             key={prop.id}
             header={prop.property}
             property={prop}
             onChange={updateProperty}
-            onDelete={() =>
-              dispatch(removePropertyAction(state.option, prop.id))
-            }
+            onDelete={() => dispatch(removePropertyAction(state.name, prop.id))}
           />
         ))}
       </PropertyList>
       <AddPropertyForm
-        optionName={state.option}
-        activeProperties={state.props.map(prop => prop.property)}
+        optionName={state.name}
+        activeProperties={state.options.map((prop) => prop.property)}
         onSubmit={(property: string, value?: any) =>
           submitAddProperty(property, value)
         }
