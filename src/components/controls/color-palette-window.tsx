@@ -2,11 +2,14 @@
 import React from 'react';
 import { jsx, css } from '@emotion/core';
 import { throttle } from 'throttle-debounce';
+
 import ColorPalette from '../../utils/color-palette';
+import { hexToRgb, rgbToHex } from '../../utils/color-utils';
 
 type Props = {
   onColorChange: (color: string) => void;
   initialColor?: string;
+  onToggle: () => void;
 };
 
 const wrapper = css`
@@ -15,18 +18,16 @@ const wrapper = css`
   top: -250px;
 `;
 
-function ColorPaletteWindow({ onColorChange, initialColor }: Props) {
+function ColorPaletteWindow({ onColorChange, onToggle, initialColor }: Props) {
   const ref = React.useRef<HTMLCanvasElement>(null);
   const colorPaletteRef = React.useRef<ColorPalette | null>(null);
-  const [currentColor, setCurrentColor] = React.useState(
-    initialColor || '#fff',
+  const [currentColor, setCurrentColor] = React.useState<number[]>(
+    hexToRgb(initialColor || '#ffffff'),
   );
 
   React.useEffect(() => {
-    onColorChange(currentColor);
+    onColorChange(rgbToHex(currentColor));
   }, [currentColor, onColorChange]);
-
-  React.useEffect(() => {}, []);
 
   React.useEffect(() => {
     const canvas = ref.current!;
@@ -37,23 +38,30 @@ function ColorPaletteWindow({ onColorChange, initialColor }: Props) {
     const unbindEvents = bindEvents();
 
     function bindEvents() {
+      function handleClickOutside(e: any) {
+        if (!canvas.contains(e.target)) {
+          onToggle();
+        }
+      }
       function getColor(e: any) {
         const x = e.pageX - canvas.getBoundingClientRect().left;
         const y = e.pageY - canvas.getBoundingClientRect().top;
 
         if (x <= canvas.width && x >= 0 && y <= canvas.height && y >= 0) {
-          const color = colorPalette.getColor(x, y);
-          setCurrentColor(color);
+          const rgbArray = colorPalette.getColor(x, y);
+          setCurrentColor(rgbArray);
         }
       }
       const throttledOnMousemove = throttle(50, getColor);
 
       const onMousedown = (e: any) => {
         getColor(e);
+
         window.addEventListener('mousemove', throttledOnMousemove);
       };
 
-      const onMouseup = () => {
+      const onMouseup = (e: any) => {
+        handleClickOutside(e);
         window.removeEventListener('mousemove', throttledOnMousemove);
       };
 
@@ -70,7 +78,7 @@ function ColorPaletteWindow({ onColorChange, initialColor }: Props) {
     return () => {
       unbindEvents();
     };
-  }, []);
+  }, [onToggle]);
 
   return (
     <div css={wrapper}>

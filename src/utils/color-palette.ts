@@ -30,9 +30,13 @@ export default class ColorPalette {
     this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
   }
 
-  getColor(x: number, y: number): string {
+  getColor(x: number, y: number): number[] {
     const imageData = this.ctx.getImageData(x, y, 1, 1);
-    const selectedColor = `rgb(${imageData.data[0]}, ${imageData.data[1]}, ${imageData.data[2]})`;
+    const selectedColor = [
+      imageData.data[0],
+      imageData.data[1],
+      imageData.data[2],
+    ];
     return selectedColor;
   }
 }
