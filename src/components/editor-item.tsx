@@ -13,6 +13,10 @@ const titleStyles = css`
   font-size: 48px;
   text-transform: uppercase;
   margin-bottom: 20px;
+
+  &:before {
+    content: '::';
+  }
 `;
 
 const wrapperStyles = css``;

@@ -18,6 +18,7 @@ import Option from './option';
 import Range from './controls/range';
 import InputRange from './controls/input-range';
 import { updateAction } from '../modules/actions';
+import InputColor from './controls/input-color';
 
 const initialState: State = {
   scrollbar: {
@@ -70,19 +71,38 @@ const App = () => {
 
   function renderOption({ type, scrollName }: RenderOptionProps) {
     switch (type) {
-      case 'width':
+      case 'background-color':
         return (
-          <InputRange
-            value={state[scrollName].props[type].value}
-            onChange={(value: number) =>
-              dispatch(
-                updateAction(scrollName, {
-                  name: type,
-                  value: Math.round(value),
-                }),
-              )
-            }
-          />
+          <Option title={type}>
+            <InputColor
+              value={state[scrollName].props[type].value}
+              onChange={(color: string) =>
+                dispatch(
+                  updateAction(scrollName, {
+                    name: type,
+                    value: color,
+                  }),
+                )
+              }
+            />
+          </Option>
+        );
+      case 'width':
+      case 'border-radius':
+        return (
+          <Option title={type}>
+            <InputRange
+              value={state[scrollName].props[type].value}
+              onChange={(value: number) =>
+                dispatch(
+                  updateAction(scrollName, {
+                    name: type,
+                    value: Math.round(value),
+                  }),
+                )
+              }
+            />
+          </Option>
         );
       default:
         return null;
