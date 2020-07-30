@@ -15,7 +15,6 @@ import Editor from './editor';
 import EditorItem from './editor-item';
 import Options from './options';
 import Option from './option';
-import Range from './controls/range';
 import InputRange from './controls/input-range';
 import { updateAction } from '../modules/actions';
 import InputColor from './controls/input-color';
@@ -145,7 +144,7 @@ const App = () => {
           </EditorItem>
         ))}
       </Editor>
-      <Preview>test</Preview>
+      <Preview scrollbarState={state}>test</Preview>
     </Layout>
   );
 };
