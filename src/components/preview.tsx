@@ -44,18 +44,31 @@ const button = css`
   }
 `;
 
+const textarea = css`
+  width: 100%;
+  min-height: 100px;
+  background: none;
+  border: none;
+`;
+
 function Preview({ scrollbarState }: Props) {
   const [styles, setStyles] = React.useState(
     generateScrollbarStyles(scrollbarState),
   );
   const [isCopied, setIsCopied] = React.useState(false);
+  const copyRef = React.useRef<HTMLTextAreaElement>(null);
 
   React.useEffect(() => {
     setStyles(generateScrollbarStyles(scrollbarState));
   }, [scrollbarState]);
 
-  function handleCopy() {
+  function handleCopy(e: React.MouseEvent<HTMLButtonElement>) {
     setIsCopied(true);
+    if (copyRef.current) {
+      copyRef.current.select();
+    }
+    document.execCommand('copy');
+    (e.target as HTMLButtonElement).focus();
 
     setTimeout(() => {
       setIsCopied(false);
@@ -71,7 +84,9 @@ function Preview({ scrollbarState }: Props) {
       <button onClick={handleCopy} css={button}>
         copy css
       </button>
-      <code>{styles?.join('')}</code>
+      <textarea ref={copyRef} spellCheck={false} css={textarea}>
+        {styles?.join('')}
+      </textarea>
       <div css={placeholder}></div>
     </div>
   );
