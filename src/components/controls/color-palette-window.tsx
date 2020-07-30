@@ -29,9 +29,11 @@ function ColorPaletteWindow({ onColorChange, onClose, initialColor }: Props) {
     hexToRgb(initialColor || '#ffffff'),
   );
 
+  // ignore onColorChange dependency, it is not needed to be updated
   React.useEffect(() => {
     onColorChange(rgbToHex(currentColor));
-  }, [currentColor, onColorChange]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentColor]);
 
   React.useEffect(() => {
     const canvas = ref.current!;

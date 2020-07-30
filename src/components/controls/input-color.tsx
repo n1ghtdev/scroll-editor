@@ -27,10 +27,7 @@ const inputStyles = css`
 function InputColor({ value, onChange }: Props) {
   const [isOpen, setIsOpen] = React.useState(false);
 
-  const handleColorChange = React.useCallback(
-    (color: string) => onChange(color),
-    [onChange],
-  );
+  const handleColorChange = (color: string) => onChange(color);
 
   const handleClose = React.useCallback(() => setIsOpen(false), []);
 

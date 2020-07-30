@@ -9,6 +9,7 @@ type Props = {
 const styles = css`
   display: flex;
   margin: 0 -10px;
+  flex-wrap: wrap;
 `;
 
 function Options({ children }: Props) {

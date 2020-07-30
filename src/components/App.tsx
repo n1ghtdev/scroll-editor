@@ -19,6 +19,7 @@ import Range from './controls/range';
 import InputRange from './controls/input-range';
 import { updateAction } from '../modules/actions';
 import InputColor from './controls/input-color';
+import InputBorder from './controls/input-border';
 
 const initialState: State = {
   scrollbar: {
@@ -71,6 +72,25 @@ const App = () => {
 
   function renderOption({ type, scrollName }: RenderOptionProps) {
     switch (type) {
+      case 'border':
+        return (
+          <Option title={type}>
+            <InputBorder
+              value={state[scrollName].props[type].value}
+              onChange={(value: any) =>
+                dispatch(
+                  updateAction(scrollName, {
+                    name: type,
+                    value: {
+                      ...state[scrollName].props[type].value,
+                      ...value,
+                    },
+                  }),
+                )
+              }
+            />
+          </Option>
+        );
       case 'background-color':
         return (
           <Option title={type}>
