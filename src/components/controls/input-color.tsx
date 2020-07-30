@@ -32,14 +32,16 @@ function InputColor({ value, onChange }: Props) {
     [onChange],
   );
 
-  const handleToggle = React.useCallback(() => setIsOpen(!isOpen), [isOpen]);
+  const handleClose = React.useCallback(() => setIsOpen(false), []);
 
   return (
     <div css={wrapperStyles}>
       <button
         css={buttonStyles}
         style={{ backgroundColor: value }}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={(e: any) => {
+          setIsOpen(!isOpen);
+        }}
       ></button>
       <input
         css={inputStyles}
@@ -51,7 +53,7 @@ function InputColor({ value, onChange }: Props) {
       />
       {isOpen ? (
         <ColorPaletteWindow
-          onToggle={handleToggle}
+          onClose={handleClose}
           initialColor={value}
           onColorChange={handleColorChange}
         />
