@@ -7,7 +7,11 @@ type Props = {
 };
 
 const styles = css`
-  width: 50%;
+  width: 100%;
+
+  @media (min-width: 960px) {
+    width: 50%;
+  }
 `;
 
 function Editor({ children }: Props) {

@@ -10,9 +10,13 @@ type Props = {
 const titleStyles = css`
   color: #46da2e;
   font-weight: 900;
-  font-size: 48px;
+  font-size: 32px;
   text-transform: uppercase;
   margin-bottom: 20px;
+
+  @media (min-width: 760px) {
+    font-size: 48px;
+  }
 
   &:before {
     content: '::';

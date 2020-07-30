@@ -15,13 +15,20 @@ const titleStyles = css`
 `;
 
 const wrapperStyles = css`
-  width: calc(50% - 20px);
+  width: 100%;
   padding: 5px 10px;
   background: #000;
   border-radius: 10px;
   margin: 0 10px 20px 10px;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.29) 0%, #000000 100%);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  @media (min-width: 960px) {
+    width: calc(50% - 20px);
+  }
+  @media (min-width: 1440px) {
+    width: calc(33% - 20px);
+  }
 `;
 
 const childrenStyles = css`

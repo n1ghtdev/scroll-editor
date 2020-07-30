@@ -18,8 +18,14 @@ body {
 html,
 body {
   min-height: 100%;
-  overflow-y: hidden;
-  overflow-x: hidden;
+}
+
+@media (min-width: 960px) {
+  html,
+  body {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
 }
 
 code {
