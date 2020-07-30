@@ -5,7 +5,6 @@ import { State } from '../modules/types';
 import { generateScrollbarStyles } from '../utils/generate-scrollbar-styles';
 
 type Props = {
-  children: React.ReactNode;
   scrollbarState: State;
 };
 
@@ -29,21 +28,50 @@ const placeholder = css`
   height: 1000px;
 `;
 
-function Preview({ children, scrollbarState }: Props) {
+const button = css`
+  display: block;
+  margin: 20px auto;
+  border: none;
+  mix-blend-mode: difference;
+  padding: 15px 20px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: bold;
+
+  &:hover {
+    opacity: 0.7;
+  }
+`;
+
+function Preview({ scrollbarState }: Props) {
   const [styles, setStyles] = React.useState(
     generateScrollbarStyles(scrollbarState),
   );
+  const [isCopied, setIsCopied] = React.useState(false);
 
   React.useEffect(() => {
     setStyles(generateScrollbarStyles(scrollbarState));
   }, [scrollbarState]);
+
+  function handleCopy() {
+    setIsCopied(true);
+
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 1000);
+  }
+
   return (
     <div
       css={css`
         ${wrapper} ${styles}
       `}
     >
-      {children}
+      <button onClick={handleCopy} css={button}>
+        copy css
+      </button>
+      <code>{styles?.join('')}</code>
       <div css={placeholder}></div>
     </div>
   );

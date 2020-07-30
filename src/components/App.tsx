@@ -144,7 +144,7 @@ const App = () => {
           </EditorItem>
         ))}
       </Editor>
-      <Preview scrollbarState={state}>test</Preview>
+      <Preview scrollbarState={state} />
     </Layout>
   );
 };
