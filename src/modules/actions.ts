@@ -1,6 +1,6 @@
-import { ActionTypes, Property } from './types';
+import { ActionTypes, ScrollProperty } from './types';
 
-export const updateAction = (option: string, payload: Property) =>
+export const updateAction = (option: string, payload: ScrollProperty) =>
   ({
     type: ActionTypes.UPDATE_PROPERTY,
     option,

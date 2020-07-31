@@ -4,9 +4,10 @@ export enum ActionTypes {
   REMOVE_PROPERTY = 'remove',
 }
 
-export type Property = {
+export type ScrollProperty = {
   value: any;
   name: PropertyKeys;
+  active: boolean;
 };
 
 export type PropertyKeys =
@@ -16,7 +17,7 @@ export type PropertyKeys =
   | 'background-color'
   | 'box-shadow';
 
-export type Properties = { [key in PropertyKeys]: Property };
+export type Properties = { [key in PropertyKeys]: ScrollProperty };
 
 export type ScrollItem = {
   name: ScrollKeys;

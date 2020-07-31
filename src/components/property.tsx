@@ -35,7 +35,7 @@ const childrenStyles = css`
   margin: 10px 0;
 `;
 
-function Option({ title, children }: Props) {
+function Property({ title, children }: Props) {
   return (
     <div css={wrapperStyles}>
       <span css={titleStyles}>{title}</span>
@@ -44,4 +44,4 @@ function Option({ title, children }: Props) {
   );
 }
 
-export default Option;
+export default Property;
