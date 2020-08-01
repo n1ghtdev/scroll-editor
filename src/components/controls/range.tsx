@@ -93,11 +93,13 @@ function Range(props: Props) {
     };
   }, [max, isMousedown, onChange]);
 
+  const width = (value / max) * 100 > 100 ? 100 : (value / max) * 100;
+
   return (
     <div css={slider} ref={ref}>
       <div css={rail}></div>
-      <div css={track} style={{ width: `${(value / max) * 100}%` }}></div>
-      <div css={thumb} style={{ left: `${(value / max) * 100}%` }}></div>
+      <div css={track} style={{ width: `${width}%` }}></div>
+      <div css={thumb} style={{ left: `${width}%` }}></div>
     </div>
   );
 }

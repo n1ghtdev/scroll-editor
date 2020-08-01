@@ -1,4 +1,4 @@
-import { ActionTypes, ScrollProperty } from './types';
+import { ActionTypes, ScrollProperty, PropertyKeys } from './types';
 
 export const updateAction = (option: string, payload: ScrollProperty) =>
   ({
@@ -7,4 +7,13 @@ export const updateAction = (option: string, payload: ScrollProperty) =>
     payload,
   } as const);
 
-export type Action = ReturnType<typeof updateAction>;
+export const addAction = (option: string, name: PropertyKeys) =>
+  ({
+    type: ActionTypes.ADD_PROPERTY,
+    option,
+    payload: {
+      name,
+    },
+  } as const);
+
+export type Action = ReturnType<typeof updateAction | typeof addAction>;

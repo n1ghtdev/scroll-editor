@@ -52,11 +52,18 @@ export const initialState: State = {
 const reducer = (state: State, action: Action): State => {
   return produce(state, (draft) => {
     switch (action.type) {
-      case ActionTypes.UPDATE_PROPERTY:
+      case ActionTypes.UPDATE_PROPERTY: {
         const toUpdateProperty =
           draft[action.option as ScrollKeys].props[action.payload.name];
         if (!!toUpdateProperty) toUpdateProperty.value = action.payload.value;
         break;
+      }
+      case ActionTypes.ADD_PROPERTY: {
+        const toUpdateProperty =
+          draft[action.option as ScrollKeys].props[action.payload.name];
+        if (!!toUpdateProperty) toUpdateProperty.active = true;
+        break;
+      }
       default:
         return state;
     }

@@ -1,7 +1,6 @@
 /** @jsx jsx */
-import React from 'react';
 import { css, jsx } from '@emotion/core';
-import { ScrollProperty } from '../modules/types';
+import { ScrollProperty, PropertyKeys } from '../modules/types';
 import Property from './property';
 import AddProperty from './add-property';
 import InputBorder from './controls/input-border';
@@ -11,7 +10,7 @@ import InputRange from './controls/input-range';
 type Props = {
   properties: any;
   updateProperty: any;
-  addProperty: () => void;
+  addProperty: (name: PropertyKeys) => void;
   removeProperty: () => void;
 };
 
@@ -86,7 +85,7 @@ function Properties(props: Props) {
       {inActiveProperties.length > 0 ? (
         <Property title="add new property">
           <AddProperty
-            onAddProperty={addProperty}
+            addProperty={addProperty}
             properties={inActiveProperties}
           />
         </Property>

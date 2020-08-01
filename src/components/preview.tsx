@@ -84,9 +84,12 @@ function Preview({ scrollbarState }: Props) {
       <button onClick={handleCopy} css={button}>
         copy css
       </button>
-      <textarea ref={copyRef} spellCheck={false} css={textarea}>
-        {styles?.join('')}
-      </textarea>
+      <textarea
+        value={styles?.join('')}
+        ref={copyRef}
+        spellCheck={false}
+        css={textarea}
+      ></textarea>
       <div css={placeholder}></div>
     </div>
   );
