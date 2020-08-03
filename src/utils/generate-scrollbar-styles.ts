@@ -1,4 +1,4 @@
-import isNumber from "is-number";
+import isNumber from 'is-number';
 
 function createWebkitPseudoElement(pseudoName: string, properties: any) {
   const pseudoElement = `-webkit-${pseudoName}`;
@@ -6,18 +6,18 @@ function createWebkitPseudoElement(pseudoName: string, properties: any) {
   return `::${pseudoElement}{ ${properties} }`;
 }
 
-function changePropertyType(property: any, propertyName: string) {
+function changePropertyType(propertyName: string, property: any) {
   switch (propertyName) {
-    case "border":
+    case 'border':
       return [property.width, property.style, property.color];
-    case "box-shadow":
+    case 'box-shadow':
       return [
-        property.inset ? "inset" : "",
+        property.inset ? 'inset' : '',
         property.x,
         property.y,
-        property.blur,
         property.spread,
-        property.color
+        property.blur,
+        property.color,
       ];
     default:
       return property;
@@ -27,7 +27,7 @@ function changePropertyType(property: any, propertyName: string) {
 function createValue(value: any) {
   if (Array.isArray(value)) {
     const values = value.map((val: any) => (isNumber(val) ? `${val}px` : val));
-    const stringifiedValues = values.join(" ");
+    const stringifiedValues = values.join(' ');
 
     return stringifiedValues;
   } else if (isNumber(value)) {
@@ -37,28 +37,32 @@ function createValue(value: any) {
 }
 
 function createProperty(property: any) {
-  const propertyValues = changePropertyType(property.value, property.property);
+  const propertyValues = changePropertyType(property.name, property.value);
 
-  return `${[property.property]}: ${createValue(propertyValues)};`;
+  return `${[property.name]}: ${createValue(propertyValues)};`;
 }
 
 function createProperties(props: any) {
-  return props.map((prop: any) => createProperty(prop)).join("\n");
+  return Object.values(props)
+    .map((prop: any) => (prop.active ? createProperty(prop) : ''))
+    .join('\n');
 }
 
 export function generateScrollbarStyles(options: any) {
   if (!options) return null;
 
-  const entries = Object.values(options);
-  const styles = entries.map((entry: any) => {
-    const props = createProperties(entry.props);
+  const scrollClasses = Object.values(options);
+
+  const styles = scrollClasses.map((scrollClass: any) => {
+    const props = createProperties(scrollClass.props);
 
     const pseudoElementWithProps = createWebkitPseudoElement(
-      entry.option,
-      props
+      scrollClass.name,
+      props,
     );
 
     return pseudoElementWithProps;
   });
+
   return styles;
 }
