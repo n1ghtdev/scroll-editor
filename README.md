@@ -19,5 +19,6 @@
 
 - [ ] add feature to remove properties
 - [ ] improve color picker UX
+- [ ] write tests
 - [ ] add more properties
   - [ ] box-shadow
