@@ -9,8 +9,9 @@ type Props = {
 };
 
 const wrapper = css`
+  order: 1;
   width: 100%;
-  background-color: #eee;
+  background-color: #3e4a61;
   margin: 20px 0;
   border-radius: 10px;
   height: calc(100vh - 40px);
@@ -19,8 +20,9 @@ const wrapper = css`
   color: #000;
 
   @media (min-width: 960px) {
-    width: 40%;
-    margin-left: auto;
+    order: 0;
+    width: 50%;
+    margin-right: auto;
   }
 `;
 
@@ -32,7 +34,8 @@ const button = css`
   display: block;
   margin: 20px auto;
   border: none;
-  mix-blend-mode: difference;
+  background: #1a2639;
+  color: #fff;
   padding: 15px 20px;
   border-radius: 5px;
   text-transform: uppercase;
@@ -44,11 +47,52 @@ const button = css`
   }
 `;
 
+const copiedTooltip = css`
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-25px);
+
+  padding: 7px 0;
+  max-width: 100px;
+  text-align: center;
+  margin: 0 auto;
+  border-radius: 5px;
+  background: #1a2639;
+  color: #fff;
+  position: relative;
+  margin-bottom: 20px;
+  transition: all 250ms;
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0px);
+  }
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    bottom: -7.5px;
+    transform: translateX(-50%) rotate(45deg);
+    background: #1a2639;
+    width: 15px;
+    height: 15px;
+  }
+`;
+
 const textarea = css`
   width: 100%;
-  min-height: 100px;
-  background: none;
-  border: none;
+  min-height: 120px;
+  padding: 15px;
+
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+
+  border: 2px solid transparent;
+  resize: none;
 `;
 
 function Preview({ scrollbarState }: Props) {
@@ -72,7 +116,7 @@ function Preview({ scrollbarState }: Props) {
 
     setTimeout(() => {
       setIsCopied(false);
-    }, 1000);
+    }, 4000);
   }
 
   return (
@@ -81,15 +125,18 @@ function Preview({ scrollbarState }: Props) {
         ${wrapper} ${styles}
       `}
     >
-      <button onClick={handleCopy} css={button}>
-        copy css
-      </button>
+      <div className={isCopied ? 'active' : ''} css={copiedTooltip}>
+        Copied!
+      </div>
       <textarea
         value={styles?.join('')}
         ref={copyRef}
         spellCheck={false}
         css={textarea}
       ></textarea>
+      <button onClick={handleCopy} css={button}>
+        copy css
+      </button>
       <div css={placeholder}></div>
     </div>
   );

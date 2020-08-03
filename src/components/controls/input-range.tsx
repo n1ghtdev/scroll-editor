@@ -15,7 +15,7 @@ const wrapper = css`
 
   & > input {
     margin-left: 20px;
-    max-width: 40px;
+    max-width: 50px;
   }
 `;
 

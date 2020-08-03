@@ -18,6 +18,7 @@ const buttonStyles = css`
   border: none;
   margin-right: 10px;
   border-radius: 5px;
+  border: 2px solid transparent;
 `;
 const inputStyles = css`
   ${Input};

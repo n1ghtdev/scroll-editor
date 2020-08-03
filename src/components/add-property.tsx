@@ -12,21 +12,24 @@ type Props = {
 const wrapper = css`
   display: flex;
   select {
-    border: none;
-    background-color: #fff;
-    padding: 7px 5px;
-    border-radius: 5px;
     flex: 1;
-    margin-right: 20px;
+    padding: 7px 5px;
+    margin-right: 10px;
   }
   button {
     min-width: 100px;
-    background-color: #46da2e;
+    background-color: #4834ec;
+    color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     text-transform: uppercase;
     font-weight: bold;
+    transition: opacity 250ms;
+
+    &:hover {
+      opacity: 0.7;
+    }
   }
 `;
 

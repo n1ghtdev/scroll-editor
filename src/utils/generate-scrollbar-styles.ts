@@ -44,7 +44,7 @@ function createProperty(property: any) {
 
 function createProperties(props: any) {
   return Object.values(props)
-    .map((prop: any) => createProperty(prop))
+    .map((prop: any) => (prop.active ? createProperty(prop) : ''))
     .join('\n');
 }
 

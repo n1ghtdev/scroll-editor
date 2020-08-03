@@ -27,7 +27,7 @@ const wrapperStyles = css`
     width: calc(50% - 20px);
   }
   @media (min-width: 1440px) {
-    width: calc(33% - 20px);
+    /* width: calc(33% - 20px); */
   }
 `;
 

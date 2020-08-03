@@ -5,7 +5,7 @@ const Input = css`
   border-radius: 5px;
   padding: 7px 5px;
   font-weight: bold;
-  box-shadow: inset 1px -1px 5px rgba(0, 0, 0, 0.35);
+  border: 2px solid transparent;
 `;
 
 export default Input;

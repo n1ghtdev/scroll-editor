@@ -18,7 +18,7 @@ export const initialState: State = {
       },
       'background-color': {
         name: 'background-color',
-        value: '#D4D4D4',
+        value: '#382e8e',
         active: true,
       },
     },
@@ -33,7 +33,7 @@ export const initialState: State = {
       },
       'background-color': {
         name: 'background-color',
-        value: '#D4D4D4',
+        value: '#4834ec',
         active: true,
       },
       'border-radius': {

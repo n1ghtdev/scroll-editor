@@ -6,6 +6,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div
       css={css`
+        max-width: 1600px;
         width: 100%;
         height: 100vh;
         margin-left: auto;

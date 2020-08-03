@@ -27,6 +27,7 @@ const App = () => {
 
   return (
     <Layout>
+      <Preview scrollbarState={state} />
       <Editor>
         {Object.values(state).map((item: ScrollItem) => (
           <EditorItem title={item.name}>
@@ -41,7 +42,6 @@ const App = () => {
           </EditorItem>
         ))}
       </Editor>
-      <Preview scrollbarState={state} />
     </Layout>
   );
 };

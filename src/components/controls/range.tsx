@@ -29,7 +29,7 @@ const track = css`
   left: 0%;
   right: auto;
 
-  background-color: #46d92e;
+  background-color: #4834ec;
   border-radius: 4px;
   position: absolute;
   height: 4px;
@@ -41,7 +41,7 @@ const thumb = css`
   width: 14px;
   height: 14px;
   margin-top: -5px;
-  background-color: #46d92e;
+  background-color: #4834ec;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
   border-radius: 50%;
   cursor: pointer;

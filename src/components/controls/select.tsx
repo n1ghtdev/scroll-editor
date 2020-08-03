@@ -13,7 +13,11 @@ type OptionProps = {
   children: React.ReactNode;
 };
 
-const select = css``;
+const select = css`
+  border: 2px solid transparent;
+  border-radius: 5px;
+  background-color: #fff;
+`;
 const option = css``;
 
 function Select({ value, onChange, children }: Props) {

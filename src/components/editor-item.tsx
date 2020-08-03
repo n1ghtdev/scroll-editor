@@ -8,7 +8,7 @@ type Props = {
 };
 
 const titleStyles = css`
-  color: #46da2e;
+  color: #d9dad7;
   font-weight: 900;
   font-size: 32px;
   text-transform: uppercase;
