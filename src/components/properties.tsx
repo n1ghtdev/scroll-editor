@@ -21,7 +21,7 @@ const styles = css`
 `;
 
 function Properties(props: Props) {
-  const { properties, updateProperty, addProperty, removeProperty } = props;
+  const { properties, updateProperty, addProperty } = props;
 
   const inActiveProperties = properties.filter(
     (prop: ScrollProperty) => !prop.active,

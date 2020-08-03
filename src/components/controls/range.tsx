@@ -49,7 +49,7 @@ const thumb = css`
 
 function Range(props: Props) {
   // TODO: implement min
-  const { min, max, value, onChange } = props;
+  const { max, value, onChange } = props;
   const ref = React.useRef<HTMLDivElement>(null);
   const [isMousedown, setIsMousedown] = React.useState(false);
 
