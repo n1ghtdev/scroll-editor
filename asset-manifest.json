@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/scroll-editor/static/css/main.14b35ed7.chunk.css",
+    "main.js": "/scroll-editor/static/js/main.c4f3a53e.chunk.js",
+    "main.js.map": "/scroll-editor/static/js/main.c4f3a53e.chunk.js.map",
+    "runtime-main.js": "/scroll-editor/static/js/runtime-main.488b76b7.js",
+    "runtime-main.js.map": "/scroll-editor/static/js/runtime-main.488b76b7.js.map",
+    "static/js/2.72b662b1.chunk.js": "/scroll-editor/static/js/2.72b662b1.chunk.js",
+    "static/js/2.72b662b1.chunk.js.map": "/scroll-editor/static/js/2.72b662b1.chunk.js.map",
+    "index.html": "/scroll-editor/index.html",
+    "precache-manifest.e49465619db11c29c7ecc531f4eeaf31.js": "/scroll-editor/precache-manifest.e49465619db11c29c7ecc531f4eeaf31.js",
+    "service-worker.js": "/scroll-editor/service-worker.js",
+    "static/css/main.14b35ed7.chunk.css.map": "/scroll-editor/static/css/main.14b35ed7.chunk.css.map",
+    "static/js/2.72b662b1.chunk.js.LICENSE.txt": "/scroll-editor/static/js/2.72b662b1.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.488b76b7.js",
+    "static/js/2.72b662b1.chunk.js",
+    "static/css/main.14b35ed7.chunk.css",
+    "static/js/main.c4f3a53e.chunk.js"
+  ]
+}
