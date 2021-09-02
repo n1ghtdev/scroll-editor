@@ -5,7 +5,7 @@
   "homepage": "http://n1ghtdev.github.io/scroll-editor",
   "dependencies": {
     "@emotion/core": "^10.0.22",
-    "immer": "^7.0.7",
+    "immer": "^9.0.6",
     "is-number": "^7.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
